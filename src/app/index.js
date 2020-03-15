@@ -1,6 +1,8 @@
 import React, {Fragment} from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import {Route, Switch, Redirect} from "react-router-dom";
+import Header from "./containers/header";
 import {
     initAppAction
 } from "../store/actions";
@@ -8,25 +10,26 @@ import {
 class App extends React.Component {
 
     componentDidMount() {
-        this.props.initAppAction([1,2,3,4,5]);
     }
 
     render() {
-        console.log(this.props.hotHotels);
 
         return (
-          <Fragment>
-              <section className="header"></section>
-
-              <section className="main">
-                  Let's start
-              </section>
-
-              <section className="footer"></section>
-          </Fragment>
+            <div className='main-page'>
+                <Header />
+                {/*<main>*/}
+                {/*    <Switch>*/}
+                {/*        */}
+                {/*    </Switch>*/}
+                {/*</main>*/}
+            </div>
         );
     }
-};
+}
+
+
+
+
 
 const mapStateToProps = state => ({
     hotHotels: state.HomeReducer.hotHotels

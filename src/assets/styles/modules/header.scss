@@ -1,0 +1,201 @@
+header {
+  .header-top,
+  .header-menu
+  {
+    width: 100%;
+    background-color: $brandColor;
+    @include Container(90px);
+    @include DisplayFlex();
+    flex-direction: row;
+  }
+
+  .header-top {
+    height: 70px;
+    justify-content: space-between;
+
+    .header-logo-wrapper,
+    .header-details
+    {
+      width: 50%;
+      height: 100%;
+    }
+
+    .header-logo-wrapper {
+      @include DisplayFlex();
+      align-items: center;
+      font-size: 20px;
+
+      svg {
+        color: $orange;
+        font-size: 30px;
+      }
+
+      .header-logo-content {
+        @include DisplayFlex();
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .header-logo-text {
+        margin-left: 10px;
+
+        span {
+          font-weight: 900;
+          letter-spacing: 2px;
+          &:first-child {
+            color: $cyan;
+          }
+          &:last-child {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .header-details {
+      @include DisplayFlex();
+      flex-direction: row;
+      justify-content: flex-end;
+
+      .header-auth-btn {
+        font-size: 15px;
+        font-weight: 600;
+        padding: 0 30px;
+        height: 100%;
+        color: #fff;
+        background-color: $brandColor;
+        border: 1px solid #11376D;
+        border-top: none;
+        border-bottom: none;
+        @include Transition(.2s);
+
+        &:hover {
+          color: $orange;
+        }
+
+        svg {
+          margin-right: 10px;
+          color: $cyan;
+        }
+      }
+
+      .header-add-btn {
+        padding: 0 40px;
+        height: 100%;
+        background-color: $cyan;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        border: none;
+        @include Transition(.2s);
+
+        svg {
+          margin-left: 10px;
+        }
+
+        &:hover {
+          background-color: $orange;
+        }
+      }
+    }
+
+
+  }
+
+  .header-menu {
+    height: 60px;
+    border-top: 1px solid #11376D;
+    border-bottom: 1px solid #11376D;
+    @include DisplayFlex();
+
+    .header-nav {
+      @include DisplayFlex();
+      flex-direction: row;
+      width: 50%;
+
+      .header-menu-icon {
+        width: 60px;
+        height: 100%;
+        border-left: 1px solid #11376D;
+        border-right: 1px solid #11376D;
+        @include DisplayFlex();
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        @include Transition(.2s);
+
+        &:hover svg {
+          color: $orange;
+        }
+
+        svg {
+          color: $cyan;
+        }
+      }
+
+      .header-nav-content {
+        width: 100%;
+        height: 100%;
+        @include DisplayFlex();
+        flex-direction: row;
+
+        .nav-item {
+          position: relative;
+          padding: 0 30px;
+          min-width: 100px;
+          height: 100%;
+          @include DisplayFlex();
+          justify-content: center;
+          align-items: center;
+
+          font-weight: 900;
+          font-size: 13px;
+          color: #fff;
+          cursor: pointer;
+          @include Transition(.3s);
+
+
+          svg {
+            margin-left: 5px;
+            color: $cyan;
+          }
+
+          .nav-item-dropdown {
+            display: none;
+            position: absolute;
+            padding: 0 30px;
+            width: 100%;
+            top: 59px;
+            list-style: none;
+            border: 1px solid $cyan;
+            @include Border-radius(5px);
+
+            li {
+              color: #333;
+              width: 100%;
+              height: 30px;
+              @include DisplayFlex();
+              align-items: center;
+
+              &:hover {
+                color: $yellow;
+              }
+            }
+
+          }
+
+          &:hover {
+            color: $orange;
+
+            .nav-item-dropdown {
+              display: block;
+            }
+          }
+
+        }
+
+      }
+    }
+  }
+
+}
