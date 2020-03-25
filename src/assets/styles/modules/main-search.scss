@@ -1,0 +1,17 @@
+.search-wrapper {
+  width: 100%;
+  height: 100%;
+
+  @include DisplayFlex();
+  justify-content: center;
+  align-items: center;
+
+  .search-content {
+    width: 50%;
+    height: 100%;
+
+    @include DisplayFlex();
+    flex-direction: column;
+  }
+
+}

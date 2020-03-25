@@ -6,4 +6,11 @@
 @import './common/variables';
 
 //HEADER STYLES
-@import './modules/header';
+@import 'modules/header/header';
+@import 'modules/header/header-mobile';
+
+//PARALLAX WRAPPER
+@import './modules/parallax-wrapper';
+
+//MAIN SEARCH
+@import './modules/main-search';

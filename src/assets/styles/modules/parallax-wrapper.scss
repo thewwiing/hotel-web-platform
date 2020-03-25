@@ -1,0 +1,26 @@
+section.parallax-wrapper {
+  width: 100%;
+  background: #333;
+  height: 60vh;
+
+  .parallax-content {
+    //&.main {
+    //  height: 60vh;
+    //  background: url("../../images/backgrounds/main-bg.jpg") no-repeat;
+    //  background-size: cover;
+    //  background-position: center;
+    //  opacity: .5;
+    //}
+  }
+
+  .react-parallax-content,
+  .react-parallax
+  {
+    height: 100%;
+  }
+
+  .react-parallax-bgimage {
+    opacity: .5;
+  }
+
+}

@@ -8,6 +8,10 @@
 
 @mixin Container($offset) {
   padding: 0 $offset;
+
+  @media only screen and (max-width: 960px) {
+    padding: 0 0 0 20px;
+  }
 }
 
 @mixin Transition($time) {
@@ -30,4 +34,10 @@
   -ms-transform: translateY($value);
   -o-transform: translateY($value);
   transform: translateY($value);
+}
+
+@mixin BackgroundSize($value) {
+  -webkit-background-size: $value;
+  background-size: $value;
+  -moz-background-size: $value;
 }
