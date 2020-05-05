@@ -1,3 +1,11 @@
+@mixin Container($offset) {
+  padding: 0 $offset;
+
+  @media only screen and (max-width: 992px) {
+    padding: 0 0 0 20px;
+  }
+}
+
 @mixin DisplayFlex() {
   display: -webkit-box;
   display: -moz-box;
@@ -6,12 +14,22 @@
   display: flex;
 };
 
-@mixin Container($offset) {
-  padding: 0 $offset;
+@mixin Flex-wrap($value) {
+  flex-wrap: $value;
+  -ms-flex-wrap: $value;
+  -webkit-flex-wrap: $value;
+}
 
-  @media only screen and (max-width: 960px) {
-    padding: 0 0 0 20px;
-  }
+@mixin CenteringWithFlex() {
+  @include DisplayFlex();
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin ButtonBaseStyles() {
+  cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 @mixin Transition($time) {
@@ -22,22 +40,33 @@
   transition: all $time;
 }
 
+@mixin Object-fit($value) {
+  -o-object-fit: $value;
+  object-fit: $value;
+}
+
 @mixin Border-radius($value) {
   -webkit-border-radius: $value;
   -moz-border-radius: $value;
   border-radius: $value;
 }
 
-@mixin TransformY($value) {
-  -webkit-transform: translateY($value);
-  -moz-transform: translateY($value);
-  -ms-transform: translateY($value);
-  -o-transform: translateY($value);
-  transform: translateY($value);
+@mixin Transform($value) {
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  -ms-transform: $value;
+  -o-transform: $value;
+  transform: $value;
 }
 
 @mixin BackgroundSize($value) {
   -webkit-background-size: $value;
   background-size: $value;
   -moz-background-size: $value;
+}
+
+@mixin Box-shadow($value) {
+  -webkit-box-shadow: $value;
+  -moz-box-shadow: $value;
+  box-shadow: $value;
 }

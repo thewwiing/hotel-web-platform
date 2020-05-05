@@ -1,9 +1,10 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {Route, Switch, Redirect} from "react-router-dom";
 import Header from "./containers/header";
-import MainSearch from "./containers/main-search"
+import MainSearch from "./containers/main-search";
+import SearchResults from "./containers/search-results";
 import {
     initAppAction
 } from "../store/actions";
@@ -19,8 +20,21 @@ class App extends React.Component {
             <div className='main-page'>
                 <Header />
                 <main>
-                    <MainSearch />
+                    <Switch>
+                        <Route
+                            path={'/'}
+                            component={MainSearch}
+                            exact
+                        />
+                        <Route
+                            path={'/search-results'}
+                            component={SearchResults}
+                            exact
+                        />
+                        <Redirect to={'/not-found'} />
+                    </Switch>
                 </main>
+
             </div>
         );
     }

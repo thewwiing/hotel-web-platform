@@ -1,0 +1,185 @@
+.result-item-wrapper {
+  width: 100%;
+  height: 245px;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #eeeeee;
+  @include DisplayFlex();
+  @include Border-radius(6px);
+
+  .result-item-img-wrapper {
+    width: 200px;
+    min-width: 200px;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    @include Border-radius(6px);
+
+    > img {
+      width: 100%;
+      height: 100%;
+      @include BackgroundSize(100%);
+      @include Object-fit(cover);
+      @include Transition(.5s);
+
+      &:hover {
+        @include Transform(scale(1.2));
+      }
+    }
+  }
+
+  .result-item-content {
+    width: 50%;
+    padding: 0 20px;
+
+    .result-item-title {
+      @include DisplayFlex();
+      width: 100%;
+      cursor: pointer;
+      color: $cyan;
+      font-size: 20px;
+      font-weight: 700;
+
+      .result-item-score {
+        @include DisplayFlex();
+        align-items: center;
+        margin-left: 5px;
+        svg {
+          font-size: 12px;
+          color: $orange
+        }
+      }
+    }
+    .result-item-address {
+      width: 100%;
+      font-size: 15px;
+      font-weight: 700;
+      color: rgb(153, 153, 153);
+      padding: 5px 0 15px;
+      border-bottom: 1px dotted rgb(153, 153, 153);
+
+      svg {
+        color: $orange;
+      }
+    }
+    .result-item-descr {
+      font-size: 13px;
+      width: 100%;
+      padding: 10px 0;
+      color: rgb(153, 153, 153);
+    }
+  }
+
+  .result-item-control {
+    width: calc(50% - 200px);
+    @include DisplayFlex();
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .result-rank-info {
+      @include DisplayFlex();
+      justify-content: flex-end;
+
+      .result-rank-descr {
+        @include DisplayFlex();
+        justify-content: space-between;
+        flex-direction: column;
+        margin-right: 10px;
+
+        span:first-child {
+          text-align: end;
+          font-size: 16px;
+          color: $brandColor;
+          font-weight: 700;
+        }
+        span:last-child {
+          text-align: end;
+          font-size: 13px;
+          color: rgb(153, 153, 153);
+        }
+
+
+      }
+
+      .result-rank {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        width: 40px;
+        height: 40px;
+        background: $brandColor;
+        @include Border-radius(6px 6px 6px 0);
+        @include CenteringWithFlex();
+      }
+    }
+
+    .result-item-boxes {
+
+      .result-item-services {
+        @include DisplayFlex();
+        @include Flex-wrap(wrap);
+        justify-content: flex-end;
+        margin-bottom: 10px;
+
+        .service-item {
+          cursor: pointer;
+          margin-right: 5px;
+          @include CenteringWithFlex();
+
+          svg {
+            color: #B3CCE0;
+            font-size: 20px;
+            &:hover {
+              color: $cyan;
+            }
+          }
+
+          &:last-child {margin-right: 0}
+        }
+      }
+
+      .result-btn-boxes {
+        margin-bottom: 10px;
+        @include DisplayFlex();
+        justify-content: flex-end;
+        button {
+          width: 36px;
+          height: 36px;
+          background: #ECF6F6;
+          border: none;
+          @include ButtonBaseStyles();
+          @include CenteringWithFlex();
+          @include Border-radius(4px);
+          @include Transition(.2s);
+
+          svg { color: #B3CCE0 }
+
+          &:hover { background: $cyan }
+          &:hover > svg { color: #fff }
+          &:last-child { margin-left: 5px }
+        }
+      }
+
+      .result-price-box {
+        text-align: center;
+        padding: 9px 12px;
+        background: #F8F9FB;
+        border: 1px dotted rgb(153, 153, 153);
+        @include Border-radius(4px);
+
+        span {
+          font-size: 13px;
+          font-weight: 700;
+          &:first-child { color: rgb(153, 153, 153) }
+          &:last-child { color: $cyan }
+        }
+      }
+    }
+  }
+
+  &:last-child {margin-bottom: 0}
+
+
+}

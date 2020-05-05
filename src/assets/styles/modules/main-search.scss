@@ -5,13 +5,308 @@
   @include DisplayFlex();
   justify-content: center;
   align-items: center;
+}
 
-  .search-content {
-    width: 50%;
-    height: 100%;
+.search-content {
+  width: 70%;
+  height: 100%;
+  padding: 100px 0;
+  @include DisplayFlex();
+  flex-direction: column;
 
+  .search-heading {
     @include DisplayFlex();
+    justify-content: center;
     flex-direction: column;
+    align-items: center;
+
+    .search-brand {
+      max-width: 400px;
+      svg {
+        &:nth-child(even) {
+          font-size: 20px;
+          color: #F9B90E;
+          margin: 0 5px;
+        }
+        &:nth-child(odd) {
+          font-size: 15px;
+          color: #D0DBDB
+        }
+      }
+    }
+
+    .search-title {
+      text-align: center;
+      font-size: 44px;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      padding-bottom: 10px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 4px;
+        background: $cyan;
+        top: 100%;
+        left: 50%;
+        @include Border-radius(3px);
+        @include Transform(translate(-50%, 0));
+      }
+    }
+
+    .search-descr {
+      text-align: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 30px;
+    }
+
   }
 
+  .search-fields {
+    margin-top: 50px;
+    width: 100%;
+    @include DisplayFlex();
+    @include Border-radius(6px);
+    @include Box-shadow(0px 0px 0px 10px rgba(255,255,255,0.3));
+
+    .input-wrapper,
+    .calendar-wrapper,
+    .person-count-wrapper{
+      position: relative;
+
+      svg {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        @include Transform(translate(0, -50%));
+        font-size: 15px;
+        &:first-child {
+          color: #F9B90F;
+        }
+        &:last-child {
+          right: 15px;
+          color: #3AACED;
+        }
+      }
+    }
+
+    .input-wrapper {
+      width: 30%;
+
+      svg {
+        &:first-child {
+          left: 15px;
+        }
+      }
+
+      .search-city-input {
+        width: 100%;
+        position: relative;
+        height: 50px;
+        padding: 0 40px;
+        border: none;
+        outline: none;
+        @include Border-radius(6px 0 0 6px);
+      }
+    }
+
+    .calendar-wrapper {
+      width: 25%;
+      height: 50px;
+      background: #fff;
+      border-left: 1px solid #eee;
+      border-right: 1px solid #eee;
+      cursor: pointer;
+
+      svg {
+        &:first-child {
+          left: 15px;
+        }
+      }
+
+      .calendar-input-wrapper { height: 50px; }
+      .calendar-input {
+        cursor: pointer;
+        outline: none;
+        border: none;
+        width: 98%;
+        height: 100%;
+        padding: 0 40px;
+      }
+    
+      .calendar-content {
+        padding: 10px;
+        position: absolute;
+        top: 105%;
+        min-width: 500px;
+        background: #fff;
+        @include DisplayFlex();
+      }
+    }
+
+    .person-count-wrapper {
+      width: 30%;
+      padding: 0 40px;
+      background: #fff;
+      cursor: pointer;
+      @include DisplayFlex();
+      align-items: center;
+
+      span {
+        color: rgb(117, 117, 117);
+        font-size: 13px;
+      }
+
+      svg {
+        &:first-child {
+          color: #F9B90F;
+          left: 10px;
+        }
+      }
+
+      .person-count-dropdown {
+        position: absolute;
+        background: #fff;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        z-index: 99;
+        @include Border-radius(0 0 6px 6px);
+
+        .count-dropdown-item {
+          position: relative;
+          padding: 10px 10px 10px 40px;
+          width: 100%;
+          height: 65px;
+          @include DisplayFlex();
+          justify-content: space-between;
+
+          .dropdown-descr {
+            height: 100%;
+            @include DisplayFlex();
+            align-items: center;
+
+            svg {
+              left: 15px;
+              color: #3AACED;
+            }
+          }
+
+          .count-wrapper {
+            max-width: 65px;
+            @include DisplayFlex();
+
+            .count-input {
+              padding-left: 10px;
+              width: 66.6%;
+              border: 1px solid #eee;
+              @include Border-radius(4px 0 0 4px);
+              outline: none;
+            }
+            .count-controllers {
+              width: 33.3%;
+              border: 1px solid #eee;
+              border-left: none;
+              .count-controller-item {
+                background: #F7F9FB;
+                width: 100%;
+                height: 50%;
+                @include DisplayFlex();
+                justify-content: center;
+                align-items: center;
+
+                span { color: #000; }
+
+                &:first-child {
+                  border-bottom: 1px solid #eee;
+                }
+              }
+            }
+          }
+
+          &:first-child {
+            border-top: 1px solid #eeeeee;
+            &::before {
+              content: "";
+              position: absolute;
+              top: 100%;
+              width: 70%;
+              height: 1px;
+              background: #eeeeee;
+              left: 50%;
+              @include Transform(translate(-50%, 0));
+            }
+          }
+        }
+      }
+    }
+
+    .search-btn {
+      width: 15%;
+      color: #fff;
+      font-weight: bold;
+      padding: 5px 30px;
+      height: 50px;
+      background: #F9B90F;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      outline: none;
+      border: none;
+      svg {
+        margin-left: 10px;
+        font-weight: 400;
+      }
+    }
+
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .search-content {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .search-content {
+    padding: 50px 0;
+
+    .search-heading {
+      .search-title {
+        font-size: 35px;
+      }
+      .search-descr {
+        margin-top: 15px;
+      }
+    }
+
+    .search-fields {
+      flex-direction: column;
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.3);
+
+      .input-wrapper,
+      .calendar-wrapper,
+      .person-count-wrapper,
+      .search-btn {
+        height: 50px;
+        width: 100%;
+        margin-bottom: 10px;
+        @include Border-radius(6px);
+      }
+      .search-btn {margin-bottom: 0}
+
+      .calendar-input,
+      .search-city-input
+      {
+        @include Border-radius(6px !important);
+      }
+
+    }
+
+  }
 }
