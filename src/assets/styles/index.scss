@@ -5,6 +5,9 @@
 @import './common/mixins';
 @import './common/variables';
 
+//LOGIN AND SIGN UP
+@import './modules/auth';
+
 //HEADER STYLES
 @import 'modules/header/header';
 @import 'modules/header/header-mobile';

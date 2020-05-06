@@ -1,0 +1,174 @@
+.auth-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.81);
+  z-index: 1000;
+  @include CenteringWithFlex();
+
+
+  .auth-container {
+    width: 500px;
+    background: #fff;
+    max-height: 90vh;
+    overflow: hidden;
+    overflow-y: auto;
+    @include Border-radius(6px);
+    @include Box-shadow(0px 0px 0px 7px rgba(255,255,255,0.3));
+
+    .auth-btn-control {
+      width: 100%;
+      height: 55px;
+
+      .auth-btn {
+        width: 50%;
+        height: 100%;
+        background: $cyan;
+        color: #fff;
+        font-weight: 600;
+        @include ButtonBaseStyles();
+
+        svg {
+          margin-right: 10px;
+        }
+
+        span {
+          display: block;
+          margin: 0 auto;
+        }
+
+        &.active {
+          background: #fff;
+          color: $cyan;
+        }
+      }
+    }
+
+    .auth-content {
+      width: 100%;
+      background: #fff;
+      padding: 30px 30px 50px;
+
+      .auth-heading {
+        width: 100%;
+        padding: 10px 0 20px;
+        border-bottom: 1px solid #eeeeee;
+        @include DisplayFlex();
+        align-items: center;
+        justify-content: space-between;
+
+        .auth-heading-title {
+          span:first-child {
+            color: #666666;
+            font-size: 20px;
+            font-weight: 600;
+            margin-right: 10px;
+          }
+          span:nth-child(2) {
+            color: $cyan;
+            font-size: 18px;
+            font-weight: 800;
+          }
+          span:last-child {
+            color: $orange;
+            font-size: 18px;
+            font-weight: 800;
+          }
+        }
+
+        .auth-close {
+          @include Border-radius(50%);
+          @include Transition(.2s);
+          @include CenteringWithFlex();
+          width: 30px;
+          height: 30px;
+          background: $cyan;
+          color: #fff;
+          cursor: pointer;
+
+          &:hover {
+            background: $brandColor;
+          }
+        }
+      }
+
+      .auth-fields {
+        margin-top: 30px;
+
+        .auth-field-wrapper {
+          width: 100%;
+          margin-bottom: 20px;
+
+          .auth-field-title {
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 16px;
+            color: rgb(135, 140, 159);
+          }
+
+          .auth-field {
+            outline: none;
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid #eeeeee;
+            font-size: 15px;
+            @include Border-radius(6px);
+
+            &.default {
+              background: #F8F9FB;
+            }
+          }
+        }
+      }
+
+      .auth-submit-control {
+        width: 100%;
+        margin-top: 30px;
+
+        .auth-submit-btn {
+          height: 40px;
+          background: $brandColor;
+          padding: 13px 35px;
+          color: #fff;
+          @include ButtonBaseStyles();
+          @include Border-radius(6px);
+          @include DisplayFlex();
+          align-items: center;
+        }
+      }
+
+    }
+
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .auth-wrapper {
+    .auth-container {
+      width: 90%;
+
+      .auth-content {
+        padding: 20px !important;
+
+        .auth-heading {
+          padding: 0 0 10px;
+
+          .auth-heading-title {
+            span {
+              font-size: 15px !important;
+            }
+          }
+        }
+
+        .auth-fields {
+          margin-top: 20px;
+          .auth-field-title { font-size: 14px !important }
+          .auth-field { padding: 10px !important }
+        }
+      }
+    }
+  }
+
+}

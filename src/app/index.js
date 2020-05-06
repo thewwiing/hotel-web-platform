@@ -1,24 +1,44 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {Route, Switch, Redirect} from "react-router-dom";
 import Header from "./containers/header";
 import MainSearch from "./containers/main-search";
 import SearchResults from "./containers/search-results";
+import SignInUp from "./containers/sign-in-up";
 import {
-    initAppAction
+    getHotelInfoByIdAction,
+    initAppAction,
+    toggleSignInUpModalAction
 } from "../store/actions";
 
 class App extends React.Component {
-
+    static propTypes = {
+        toggleSignInUpModalAction: PropTypes.func.isRequired,
+        initAppAction: PropTypes.func.isRequired,
+        isSignInUpOpen: PropTypes.bool.isRequired
+    };
     componentDidMount() {
+        // this.props.initAppAction();
+        // this.props.getHotelInfoByIdAction();
     }
 
     render() {
+        const {
+            props: {
+                isSignInUpOpen,
+                toggleSignInUpModalAction
+            }
+        } = this;
 
         return (
             <div className='main-page'>
-                <Header />
+                {
+                    isSignInUpOpen &&
+                    <SignInUp/>
+                }
+                <Header toggleSignInUpModalAction={toggleSignInUpModalAction} />
                 <main>
                     <Switch>
                         <Route
@@ -45,12 +65,15 @@ class App extends React.Component {
 
 
 const mapStateToProps = state => ({
+    isSignInUpOpen: state.AuthReducer.isSignInUpOpen,
     hotHotels: state.HomeReducer.hotHotels
 });
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            initAppAction
+            initAppAction,
+            toggleSignInUpModalAction,
+            getHotelInfoByIdAction
 
         },
         dispatch
