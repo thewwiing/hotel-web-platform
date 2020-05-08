@@ -57,6 +57,21 @@ class MenuHeader extends React.Component {
                         </div>
                     </nav>
                 </div>
+
+                <div className="header-profile">
+                    <div className="header-profile-wrapper">
+                        <img src="https://avatars.mds.yandex.net/get-pdb/1705881/f8db19d4-c10e-4d27-83a3-db53d4f52430/s375" alt=""/>
+                        <span>Мой аккаунт</span>
+                        <FontAwesomeIcon icon={faCaretDown}/>
+                        <ul className="header-profile-dropdown">
+                            <li><span>Профиль</span></li>
+                            <li><span>Bookings</span></li>
+                            <li><span>Выйти</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+
             </div>
         );
     }

@@ -5,13 +5,10 @@ import {faMapMarkerAlt, faWifi, faParking, faUtensils, faHeart, faStar} from "@f
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class SearchItem extends React.Component {
-    static propTypes = {
-        hotel: PropTypes.object.isRequired
-    };
 
     render() {
         const {
-            props: {hotel}
+            props: {hotel, history}
         } = this;
 
         return (
@@ -27,7 +24,9 @@ class SearchItem extends React.Component {
                 {/*  TEXT INFO  */}
                 <div className="result-item-content">
                     <div className="result-item-title">
-                        {hotel['name'] }
+                        <span onClick={() => history.push(`/hotel/${hotel['id']}`)}>
+                            {hotel['name']}
+                        </span>
                         <div className='result-item-score'>
                             <FontAwesomeIcon icon={faStar}/>
                             <FontAwesomeIcon icon={faStar}/>
@@ -97,5 +96,10 @@ class SearchItem extends React.Component {
         );
     }
 }
+
+SearchItem.propTypes = {
+    hotel: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+};
 
 export default withRouter(SearchItem);

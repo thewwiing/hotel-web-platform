@@ -268,6 +268,16 @@
 @media only screen and (max-width: 1200px) {
   .search-content {
     width: 90%;
+    padding: 70px 0;
+
+    .search-heading {
+      .search-title {
+        font-size: 40px;
+      }
+      .search-descr {
+        margin-top: 20px;
+      }
+    }
   }
 }
 
@@ -307,6 +317,21 @@
       }
 
     }
+  }
+}
 
+@media only screen and (max-width: 568px) {
+  .search-content {
+    width: 90%;
+    padding: 50px 0;
+
+    .search-heading {
+      .search-title {
+        font-size: 25px;
+      }
+      .search-descr {
+        margin-top: 20px;
+      }
+    }
   }
 }

@@ -10,10 +10,11 @@ API.GET = (url = '') => {
     makeRequest(api, init);
 };
 
-API.POST = (url = '', params) => {
+API.POST = (url = '', params = {}) => {
     const api = baseURL + url;
     const init = setHeader(METHODS.POST, params);
     makeRequest(api, init);
 };
+
 
 export default API;

@@ -5,7 +5,11 @@ import {withRouter} from "react-router";
 import {bindActionCreators} from "redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {toggleSignInUpModalAction} from "../../../store/actions";
+import {
+    signInAction,
+    signUpAction,
+    toggleSignInUpModalAction
+} from "../../../store/actions";
 
 class SignInUp extends React.Component {
     state = {
@@ -34,6 +38,7 @@ class SignInUp extends React.Component {
 
     submit = () => {
         const {
+            props: {signInAction, signUpAction},
             state: {isLoginActive}
         } = this;
         const state = this.state;
@@ -43,10 +48,13 @@ class SignInUp extends React.Component {
         if(state['nameField']['value'].length < 4 && !isLoginActive) state['nameField']['isValid'] = false;
 
         if (isLoginActive && state['emailField']['isValid'] && state['passField']['isValid']) {
-            alert('REQUEST SEND')
+            signInAction({
+                email: state['emailField']['value'],
+                password: state['passField']['value']
+            });
         }
         if (!isLoginActive && state['emailField']['isValid'] && state['nameField']['isValid'] && state['passField']['isValid']) {
-            alert('REQUEST SEND SIGN UP')
+            signUpAction();
         }
 
         this.setState(state);
@@ -176,7 +184,9 @@ class SignInUp extends React.Component {
 }
 
 SignInUp.propTypes = {
-    toggleSignInUpModalAction: PropTypes.func.isRequired
+    toggleSignInUpModalAction: PropTypes.func.isRequired,
+    signInAction: PropTypes.func.isRequired,
+    signUpAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -184,7 +194,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            toggleSignInUpModalAction
+            toggleSignInUpModalAction,
+            signInAction,
+            signUpAction
         },
         dispatch
     );

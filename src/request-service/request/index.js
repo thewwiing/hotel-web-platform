@@ -7,8 +7,10 @@ export const setHeader = (method, params = null) => {
     const init = {
         method,
         headers: {
+            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
-            'accept': 'application/json'
+            'accept': 'application/json',
+            'mode': 'no-cors'
         },
     };
 

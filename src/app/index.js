@@ -7,6 +7,7 @@ import Header from "./containers/header";
 import MainSearch from "./containers/main-search";
 import SearchResults from "./containers/search-results";
 import SignInUp from "./containers/sign-in-up";
+import CurrentHotel from "./containers/current-hotel";
 import {
     getHotelInfoByIdAction,
     initAppAction,
@@ -49,6 +50,11 @@ class App extends React.Component {
                         <Route
                             path={'/search-results'}
                             component={SearchResults}
+                            exact
+                        />
+                        <Route
+                            path={'/hotel/:id'}
+                            component={CurrentHotel}
                             exact
                         />
                         <Redirect to={'/not-found'} />

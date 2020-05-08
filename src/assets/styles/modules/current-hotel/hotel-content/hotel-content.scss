@@ -1,0 +1,30 @@
+.hotel-content-wrapper {
+  width: 100%;
+  background: #ECF6F6;
+  padding: 50px 0;
+  @include DisplayFlex();
+
+  .hotel-content-container {
+    @include DisplayFlex();
+
+    .hotel-main-content {
+      width: 60%;
+    }
+    .hotel-add-content {
+      width: 40%;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .hotel-content-container {
+    flex-direction: column;
+
+    .hotel-main-content {
+      width: 100% !important;
+    }
+    .hotel-add-content {
+      width: 100% !important;
+    }
+  }
+}

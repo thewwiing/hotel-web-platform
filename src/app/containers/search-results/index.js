@@ -33,7 +33,7 @@ class SearchResults extends React.Component {
                             <div className="search-listing">
                                 {
                                     searchResults.map(item => (
-                                        <ResultItem hotel={item}/>
+                                        <ResultItem key={item['id']} hotel={item}/>
                                     ))
                                 }
                             </div>
@@ -47,7 +47,7 @@ class SearchResults extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    searchResults: state.SearchResultsReducer.searchResults
+    searchResults: state.HotelsReducer.searchResults
 });
 
 const mapDispatchToProps = dispatch => {

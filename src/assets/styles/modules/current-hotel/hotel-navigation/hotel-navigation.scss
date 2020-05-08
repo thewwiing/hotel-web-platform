@@ -1,0 +1,33 @@
+.hotel-navigation {
+  background: #fff;
+  width: 100%;
+  padding: 14px 0;
+  height: 68px;
+  border-bottom: 1px solid #eeeeee;
+
+  .hotel-nav-content {
+    float: left;
+    overflow: hidden;
+    @include DisplayFlex();
+    @include Border-radius(6px);
+
+    .hotel-nav-btv {
+      padding: 10px 30px;
+      color: #898CA0;
+      background: #ECF6F6;
+
+      font-weight: 700;
+      @include ButtonBaseStyles();
+
+      &.active {
+        color: #fff;
+        background: $cyan;
+      }
+    }
+  }
+
+  &.fixed {
+    position: fixed;
+    top: 110px;
+  }
+}

@@ -4,11 +4,10 @@ const hotelsController = {};
 
 hotelsController.getHotelInfoById = (store, action) => {
     const body = {
-        email: "qwe@mail.com",
-        password :"1506840n"
+        hotel_id: 1
     };
     API.POST(
-        `app/obtain-token`,
+        'app/hotel/',
         body
     );
 };

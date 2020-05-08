@@ -1,4 +1,9 @@
 header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+
   .header-top,
   .header-menu
   {
@@ -106,7 +111,7 @@ header {
     border-bottom: 1px solid #11376D;
     @include DisplayFlex();
 
-    .header-nav {
+    .header-nav{
       @include DisplayFlex();
       flex-direction: row;
       width: 70%;
@@ -213,6 +218,60 @@ header {
 
       }
     }
+
+    .header-profile {
+      width: 30%;
+      padding-right: 20px;
+      @include DisplayFlex();
+      align-items: center;
+      justify-content: flex-end;
+
+      .header-profile-wrapper {
+        height: 100%;
+        @include DisplayFlex();
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        .header-profile-dropdown {
+          display: none;
+          padding: 10px;
+          position: absolute;
+          width: calc(100% + 10px);
+          background: #fff;
+          top: 100%;
+          z-index: 1;
+          @include Border-radius(6px);
+
+          span {
+            color: #50596e;
+          }
+          li {
+            padding: 3px 0;
+            &:hover > span{color: $cyan}
+          }
+          &:hover {display: block}
+        }
+
+        img {
+          width: 32px;
+          height: 32px;
+          @include Border-radius(50%);
+        }
+
+        span {
+          margin-left: 10px;
+          color: #fff;
+          font-size: 15px;
+          font-weight: 700;
+          @include Transition(.2s);
+        }
+        svg {margin-left: 10px; color: $cyan}
+
+        &:hover > span {color: $orange}
+        &:hover > .header-profile-dropdown {display: block}
+      }
+    }
   }
 }
 
@@ -228,5 +287,38 @@ header {
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header {
+    .header-menu {
+      padding: 0;
+    }
+    .header-details >.header-add-btn {
+        display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  header {
+    .header-logo-wrapper {
+      .header-logo-content {
+        svg {font-size: 20px}
+      }
+      .header-logo-text > span {
+        font-weight: 800 !important;
+      }
+    }
+    .header-details > .header-auth-btn {
+      padding: 0 20px !important;
+    }
+
+    .header-menu {
+      .header-nav { width: 40% }
+      .header-profile { width: 60% }
+    }
+
   }
 }
