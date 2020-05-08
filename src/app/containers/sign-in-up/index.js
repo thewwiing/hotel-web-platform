@@ -150,7 +150,7 @@ class SignInUp extends React.Component {
                                     </div>
                                 }
                             </div>
-                            <div className="auth-field-wrapper">
+                            <div className="auth-field-wrapper field-wrapper">
                                 <div className={`auth-field-title  ${!passField['isValid'] ? 'err-text' : ''}`}>Пароль</div>
                                 <input className={`auth-field ${!passField['isFocused'] ? 'default' : ''} ${!passField['isValid'] ? 'err-field' : ''}`}
                                        type='password'

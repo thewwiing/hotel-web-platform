@@ -1,0 +1,192 @@
+footer.footer {
+  width: 100%;
+  background: #000;
+
+  .top-footer {
+    width: 100%;
+    padding: 70px 0;
+    background: #143972;
+
+    .footer-contacts {
+      .footer-contacts-title {
+        color: #fff;
+        font-weight: 700;
+        font-size: 18px;
+        padding-bottom: 25px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255,255,255,0.11);
+      }
+      .footer-cotacts-text {
+        color: #fff;
+        padding-bottom: 25px;
+        margin-bottom: 30px;
+        border-bottom: 1px dotted rgba(255,255,255,0.11);
+      }
+      .footer-contacts-contents {
+        padding-bottom: 25px;
+        margin-bottom: 30px;
+        border-bottom: 1px dotted rgba(255,255,255,0.11);
+
+        .footer-contact-item {
+          @include DisplayFlex();
+          align-items: center;
+          font-size: 17px;
+          margin-bottom: 10px;
+
+          svg {
+            width: 17px;
+            color: $orange;
+            margin-right: 10px;
+            opacity: .7;
+          }
+          div {
+            &:first-child {
+              span {color: rgba(255,255,255,0.51)}
+            }
+            &:last-child {
+              margin-left: 10px;
+              cursor: pointer;
+              color: #fff;
+              &:hover {color: $cyan}
+            }
+
+          }
+          &:last-child {margin-bottom: 0}
+        }
+
+      }
+
+      .footer-contacts-social {
+        @include DisplayFlex();
+        align-items: center;
+
+        .footer-social-title {
+          color: #fff;
+          font-weight: 700;
+          font-size: 17px;
+          margin-right: 20px;
+        }
+        .footer-social-content {
+          @include DisplayFlex();
+
+          .footer-social-item {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.11);
+            @include Border-radius(4px);
+            @include CenteringWithFlex();
+            cursor: pointer;
+            margin-right: 10px;
+
+            svg {
+              color: $cyan;
+              &:hover {
+                color: $orange;
+              }
+            }
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .footer-help {
+      margin-top: 30px;
+      padding: 25px 30px 25px 45px;
+      border: 1px solid rgba(255,255,255,0.1);
+      @include Border-radius(4px);
+      @include DisplayFlex();
+      align-items: center;
+      justify-content: space-between;
+      opacity: 1;
+
+      .footer-help-text {
+        @include DisplayFlex();
+        flex-direction: column;
+
+        span:first-child {
+          color: #fff;
+          font-weight: 700;
+          font-size: 17px;
+          margin-bottom: 10px;
+        }
+        span:last-child {
+          color: $cyan;
+          font-size: 22px;
+          font-weight: 800;
+          cursor: pointer;
+        }
+      }
+      .footer-help-btn {
+        padding: 15px 20px;
+        background: $orange;
+        color: #fff;
+        font-weight: 700;
+        @include Border-radius(4px);
+        @include ButtonBaseStyles();
+
+        svg { margin-left: 10px }
+
+      }
+    }
+  }
+
+  .bottom-footer {
+    width: 100%;
+    height: 80px;
+    background: #071B41;
+    @include CenteringWithFlex();
+
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  footer.footer {
+    .top-footer {
+      padding: 40px 0;
+
+      .footer-contacts {
+        .footer-contacts-social {
+          flex-direction: column;
+          align-items: flex-start;
+
+          .footer-social-content { margin-top: 10px }
+        }
+
+        .footer-contacts-contents {
+          .footer-contact-item {
+            font-size: 15px;
+          }
+        }
+
+        .footer-contacts-social {
+          .footer-social-title {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .footer-help {
+        padding: 25px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .footer-help-text {
+          span:first-child {font-size: 14px; margin-bottom: 5px }
+          span:last-child {font-size: 18px }
+        }
+
+        .footer-help-btn {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}

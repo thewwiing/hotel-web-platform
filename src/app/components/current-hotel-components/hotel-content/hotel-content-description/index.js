@@ -13,7 +13,7 @@ class HotelDescription extends React.Component {
         };
 
         return (
-            <div className='hotel-descr-wrapper hotel-cw' style={{marginBottom: '10px'}}>
+            <div className='hotel-descr-wrapper hotel-cw'>
                 <div className="descr-title-wrapper h-cw-title-w">
                     <div className='descr-title-text'>
                         <span>Об отеле</span>

@@ -5,6 +5,7 @@ import {bindActionCreators} from "redux";
 import HotelHeading from "../../components/current-hotel-components/hotel-heading";
 import HotelNav from "../../components/current-hotel-components/hotel-navigation";
 import HotelContent from "../../components/current-hotel-components/hotel-content";
+import {withRouter} from "react-router";
 
 class CurrentHotel extends React.Component {
     state = {
@@ -29,14 +30,14 @@ class CurrentHotel extends React.Component {
     render() {
         const {
             state: {navIsFixed},
-            props: {currentHotel}
+            props: {currentHotel, history}
         } = this;
 
         // console.log(navIsFixed);
 
         return (
             <section className='hotel-wrapper'>
-                <HotelHeading hotel={currentHotel}/>
+                <HotelHeading hotel={currentHotel} history={history} />
                 <HotelNav isFixed={navIsFixed} />
                 <HotelContent hotel={currentHotel}/>
             </section>
@@ -46,7 +47,8 @@ class CurrentHotel extends React.Component {
 }
 
 CurrentHotel.propTypes = {
-    currentHotel: PropTypes.object.isRequired
+    currentHotel: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -61,4 +63,6 @@ const mapDispatchToProps = dispatch => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentHotel);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    withRouter(CurrentHotel)
+);

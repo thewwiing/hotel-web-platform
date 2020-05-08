@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {faStar, faPhone, faMapMarkerAlt, faEnvelope, faCaretRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {withRouter} from "react-router";
+import {compose} from "redux";
+import {withParallax} from "../../../common/parallax-component";
 
 class HotelHeading extends React.Component {
     componentDidMount() {
@@ -102,4 +103,6 @@ HotelHeading.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default withRouter(HotelHeading);
+export default compose(
+    // withParallax
+)(HotelHeading);

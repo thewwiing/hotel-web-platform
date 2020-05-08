@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HotelComments from './hotel-content-comments';
 import HotelDescription from './hotel-content-description';
+import AddComment from "./hotel-add-comment";
+import HotelReservation from "./hotel-reservation";
 
 class HotelContent extends React.Component {
     render() {
@@ -16,11 +18,12 @@ class HotelContent extends React.Component {
 
                         <div className="hotel-main-content">
                             <HotelDescription descr={hotel['descr']}/>
-                            <HotelComments comments={hotel['commentsInfo']} />
+                            <HotelComments comments={hotel['commentsInfo']}/>
+                            <AddComment />
                         </div>
 
                         <div className="hotel-add-content">
-                            123
+                            <HotelReservation/>
                         </div>
 
                     </div>

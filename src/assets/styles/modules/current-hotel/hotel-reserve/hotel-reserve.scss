@@ -1,0 +1,68 @@
+.hotel-reserve-wrapper {
+
+  .hotel-reserve-fields {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #EEEEEE;
+
+    .hotel-reserve-field-item {
+      font-weight: 500;
+      font-size: 15px;
+
+      .reserve-title-wrapper {
+        color: #888B9F;
+        margin-bottom: 12px;
+      }
+
+      &:first-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .hotel-reserve-total {
+    padding: 20px 0;
+    @include DisplayFlex();
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEEEEE;
+
+    span {
+      color: rgb(135, 140, 159);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    > div {
+      @include DisplayFlex();
+      align-items: center;
+
+      span {
+        color: $cyan;
+        &:first-child {
+          font-size: 20px;
+          font-weight: 700;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .hotel-reserve-submit {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px 0;
+    color: #fff;
+    font-size: 15px;
+    background: $orange;
+    @include Border-radius(4px);
+    @include ButtonBaseStyles();
+    @include CenteringWithFlex();
+
+    > div {
+      @include DisplayFlex();
+      align-items: center;
+
+      svg {margin-left: 5px}
+    }
+  }
+}

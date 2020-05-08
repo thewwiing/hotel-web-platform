@@ -8,7 +8,7 @@ class HotelComments extends React.Component {
         const {comments} = this.props;
 
         return (
-            <div className='hotel-comments-wrapper hotel-cw'>
+            <div className='hotel-comments-wrapper hotel-cw' style={{marginTop: '10px'}}>
                 <div className="comment-title-wrapper h-cw-title-w">
                     <div className='comment-title-text'>
                         <span>Отызвы - </span>

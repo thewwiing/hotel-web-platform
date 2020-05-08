@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {Route, Switch, Redirect} from "react-router-dom";
+
 import Header from "./containers/header";
+import Footer from "./containers/footer";
 import MainSearch from "./containers/main-search";
 import SearchResults from "./containers/search-results";
 import SignInUp from "./containers/sign-in-up";
 import CurrentHotel from "./containers/current-hotel";
+
 import {
     getHotelInfoByIdAction,
     initAppAction,
@@ -60,6 +63,8 @@ class App extends React.Component {
                         <Redirect to={'/not-found'} />
                     </Switch>
                 </main>
+                <Footer />
+
 
             </div>
         );
