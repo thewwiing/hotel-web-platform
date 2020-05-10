@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import {withRouter} from "react-router";
+
 import HotelHeading from "../../components/current-hotel-components/hotel-heading";
 import HotelNav from "../../components/current-hotel-components/hotel-navigation";
 import HotelContent from "../../components/current-hotel-components/hotel-content";
-import {withRouter} from "react-router";
 
 class CurrentHotel extends React.Component {
     state = {
@@ -21,10 +22,11 @@ class CurrentHotel extends React.Component {
     }
 
     handleScroll = () => {
-        // const nav = document.querySelector('.hotel-navigation');
-        // const heading = document.querySelector('.hotel-content-wrapper');
-        // if (heading.getBoundingClientRect().top <= 178) this.setState({navIsFixed: true});
-        // if (heading.getBoundingClientRect().top > 178) this.setState({navIsFixed: false});
+        const heading = document.querySelector('.hotel-content-wrapper');
+        // const footer = document.querySelector('.footer');
+
+        if (heading.getBoundingClientRect().top <= 110) this.setState({navIsFixed: true});
+        if (heading.getBoundingClientRect().top > 110) this.setState({navIsFixed: false});
     };
 
     render() {
@@ -32,8 +34,6 @@ class CurrentHotel extends React.Component {
             state: {navIsFixed},
             props: {currentHotel, history}
         } = this;
-
-        // console.log(navIsFixed);
 
         return (
             <section className='hotel-wrapper'>

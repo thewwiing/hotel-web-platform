@@ -1,0 +1,47 @@
+.user-info {
+
+  .user-info-fields {
+    .user-info-item {
+      font-weight: 600;
+      margin-bottom: 20px;
+
+      span {
+        font-size: 15px;
+        display: block;
+        color: rgb(135, 140, 159);
+        margin-bottom: 10px;
+      }
+      .user-field-wrapper {
+        position: relative;
+
+        input {
+          color: #666;
+          @include FieldInput(14px 20px 14px 45px);
+        }
+
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 20px;
+          @include Transform(translateY(-50%));
+          color: $yellow;
+        }
+
+        .user-info-error {
+          position: absolute;
+          top: calc(100% + 5px);
+          left: 0;
+        }
+      }
+
+      &:last-child { margin: 0 }
+      &.error {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .user-info-submit {
+    @include ButtonWithTwoFilled($yellow, #FAC855);
+  }
+}

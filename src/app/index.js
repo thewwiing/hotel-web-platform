@@ -10,6 +10,7 @@ import MainSearch from "./containers/main-search";
 import SearchResults from "./containers/search-results";
 import SignInUp from "./containers/sign-in-up";
 import CurrentHotel from "./containers/current-hotel";
+import UserAccount from "./containers/user-account";
 
 import {
     getHotelInfoByIdAction,
@@ -60,6 +61,12 @@ class App extends React.Component {
                             component={CurrentHotel}
                             exact
                         />
+                        <Route
+                            path={'/user-account'}
+                            component={UserAccount}
+                            exact
+                        />
+
                         <Redirect to={'/not-found'} />
                     </Switch>
                 </main>

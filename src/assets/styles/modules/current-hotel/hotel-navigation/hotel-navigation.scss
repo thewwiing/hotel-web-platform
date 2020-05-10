@@ -4,6 +4,8 @@
   padding: 14px 0;
   height: 68px;
   border-bottom: 1px solid #eeeeee;
+  position: absolute;
+  top: 550px;
 
   .hotel-nav-content {
     float: left;
@@ -29,5 +31,12 @@
   &.fixed {
     position: fixed;
     top: 110px;
+    z-index: 1;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .hotel-navigation {
+    top: calc(100vh - 110px);
   }
 }

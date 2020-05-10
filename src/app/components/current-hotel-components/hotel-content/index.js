@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import HotelComments from './hotel-content-comments';
 import HotelDescription from './hotel-content-description';
 import AddComment from "./hotel-add-comment";

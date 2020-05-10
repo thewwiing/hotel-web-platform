@@ -49,31 +49,7 @@
     }
 
     .hotel-comment-submit {
-      width: 200px;
-      height: 44px;
-      background: $orange;
-      color: #fff;
-      font-weight: 600;
-      padding: 0;
-      overflow: hidden;
-      @include Border-radius(4px);
-      @include ButtonBaseStyles();
-      @include DisplayFlex();
-      justify-content: space-between;
-
-      div {
-        height: 44px;
-        @include CenteringWithFlex();
-
-        &:first-child {
-          width: calc(100% - 50px);
-        }
-        &:last-child {
-          width: 50px;
-          background: rgba(255,255,255,0.2);
-        }
-      }
-
+      @include ButtonWithTwoFilled($orange, rgba(255,255,255,0.2));
     }
 
   }

@@ -6,6 +6,7 @@ import {
     faPhoneVolume
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import instagram from "../../../../assets/images/icons/instagram.svg";
 
 class TopFooter extends React.Component {
     render() {
@@ -19,7 +20,11 @@ class TopFooter extends React.Component {
                         </div>
 
                         <div className="footer-cotacts-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi dolore ex, fugit illo nihil odio tempore? Ad blanditiis, dolorum eligendi est, expedita fuga inventore ipsam molestias nulla odio perferendis quae saepe sed similique velit voluptas voluptate! Architecto, eveniet, sit?
+                            EasyHotel - дипломный проект, по поиску и бронированию
+                            отелей в пределах нашей страны. Платформа представлена в виде
+                            веб-сайта, сделанная на основе новейших и технологических
+                            библиотек. Основой сайта состовляет фреймворк "React js" -
+                            созданный компанией Facebook.
                         </div>
 
                         <div className="footer-contacts-contents">
@@ -49,7 +54,7 @@ class TopFooter extends React.Component {
                                     <span>Телефон:</span>
                                 </div>
                                 <div>
-                                    +7(708)-508-08-99
+                                    <a href="tel:+7708-508-08-99">+7(708)-508-08-99</a>
                                 </div>
                             </div>
                         </div>
@@ -59,15 +64,27 @@ class TopFooter extends React.Component {
                                 НАЙДИТЕ НАС:
                             </div>
                             <div className="footer-social-content">
-                                <div className='footer-social-item'>
+                                <a className='footer-social-item'
+                                   href='https://www.instagram.com/sdukz/'
+                                   rel='noopener noreferrer'
+                                   target='_blank'
+                                >
                                     <FontAwesomeIcon icon={faPhone}/>
-                                </div>
-                                <div className='footer-social-item'>
+                                </a>
+                                <a className='footer-social-item'
+                                   href='https://vk.com/sdukz'
+                                   rel='noopener noreferrer'
+                                   target='_blank'
+                                >
                                     <FontAwesomeIcon icon={faPhone}/>
-                                </div>
-                                <div className='footer-social-item'>
+                                </a>
+                                <a className='footer-social-item'
+                                   href='https://www.facebook.com/Education.comFanPage/'
+                                   rel='noopener noreferrer'
+                                   target='_blank'
+                                >
                                     <FontAwesomeIcon icon={faPhone}/>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -75,13 +92,15 @@ class TopFooter extends React.Component {
                     <div className="footer-help">
                         <div className='footer-help-text'>
                             <span>Поддержка</span>
-                            <span>+7(747)4321254</span>
+                            <a href='tel:+7747-432-12-54'>+7(747)4321254</a>
                         </div>
                         <button className="footer-help-btn">
+                            <a href="tel:+7747-432-12-54">
                                 <span>
                                     Позвонить
                                     <FontAwesomeIcon icon={faPhoneVolume}/>
                                 </span>
+                            </a>
                         </button>
                     </div>
                 </div>

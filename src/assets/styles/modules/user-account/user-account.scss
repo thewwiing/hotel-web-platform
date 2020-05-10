@@ -1,0 +1,240 @@
+section.user-account {
+  background: #fff;
+
+  .user-header {
+    background: #339BD6;
+
+    .user-header-paths {
+      padding: 50px 0;
+      width: 100%;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      span { cursor: pointer }
+      svg { margin: 0 10px }
+    }
+
+    .user-header-content {
+
+      .user-card {
+        padding-top: 40px;
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 250px;
+        height: 451px;
+        background: $brandColor;
+        overflow: hidden;
+        @include Border-radius(6px);
+        @include DisplayFlex();
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 1;
+
+        .user-card-image {
+          padding: 0 55px;
+
+          img {
+            width: 140px;
+            height: 140px;
+            @include Border-radius(4px);
+            @include Object-fit(cover);
+          }
+        }
+
+        .user-card-content {
+          @include DisplayFlex();
+          flex-direction: column;
+          text-align: center;
+          color: #fff;
+          font-weight: 700;
+
+          span:first-child {
+            margin-bottom: 10px;
+          }
+          span:last-child {
+            display: block;
+            position: relative;
+            font-size: 20px;
+            padding-bottom: 15px;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              width: 30px;
+              height: 2px;
+              background: #486DA4;
+              @include Transform(translateX(-50%));
+              @include Border-radius(4px);
+            }
+          }
+
+        }
+
+        .user-card-bottom {
+          color: #fff;
+
+          .user-card-stats {
+            @include DisplayFlex();
+            border-top: 1px solid #174278;
+            border-bottom: 1px solid #174278;
+            height: 69px;
+
+            .card-stats-item {
+              @include CenteringWithFlex();
+              flex-direction: column;
+
+              background: #1C5499;
+              width: 33.3%;
+              border-right: 1px solid #174278;
+              font-size: 14px;
+              font-weight: 700;
+              span:first-child { margin-bottom: 5px }
+
+              &:last-child { border:none }
+            }
+          }
+
+          .user-card-btn {
+            width: 100%;
+            background: $cyan;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 15px 0;
+            @include CenteringWithFlex();
+            @include ButtonBaseStyles();
+
+            svg { margin-left: 10px }
+          }
+        }
+      }
+
+      .user-header-nav {
+        padding-left: 280px;
+        list-style: none;
+        height: 40px;
+        @include DisplayFlex();
+
+        color: #fff;
+        font-weight: 700;
+
+        .user-nav-item {
+          padding: 13px 20px;
+          cursor: pointer;
+          @include Transition(.2s);
+          @include Border-radius(4px 4px 0 0);
+
+          svg { margin-right: 5px }
+
+          &.active {
+            color: #656565;
+            background: #fff;
+
+            svg { color: $cyan }
+          }
+          &:hover {
+            color: #656565;
+            background: #fff;
+            @include Box-shadow(0px -2px 10px 0px rgba(0, 0, 0, 0.07));
+            svg { color: $cyan }
+          }
+        }
+      }
+
+      .user-nav-toggle {
+        display: none;
+        width: 100%;
+        padding: 14px 20px;
+        color: #fff;
+        background: $brandColor;
+        font-weight: 700;
+        @include ButtonBaseStyles();
+        @include Border-radius(6px 6px 0 0);
+
+        svg {
+          margin-left: 10px;
+          color: $cyan;
+        }
+      }
+
+      .user-mobile-menu {
+        display: none;
+        width: 100%;
+        background: #fff;
+        padding: 10px 25px;
+        margin-bottom: 10px;
+
+        .user-mobile-menu-item {
+          padding: 10px 0;
+          font-weight: 700;
+          color: #656565;
+          cursor: pointer;
+          font-size: 15px;
+
+          &.active {
+            color: $cyan;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  section.user-account {
+    .user-header {
+      .user-header-paths {
+        padding: 40px 0 30px;
+      }
+
+      .user-header-content {
+        .user-card {
+          position: initial;
+          width: 100%;
+          margin-bottom: 30px;
+
+          .user-card-image {
+            img {
+              display: block;
+              margin: 0 auto;
+            }
+          }
+          .user-card-bottom {
+            .user-card-btn {
+              background: $yellow;
+            }
+          }
+        }
+        .user-header-nav {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  section.user-account {
+    .user-header {
+      overflow: auto;
+
+      .user-header-content {
+
+        .user-header-nav {
+          display: none;
+        }
+
+        .user-nav-toggle {
+          display: block;
+        }
+        .user-mobile-menu {
+          display: block;
+        }
+      }
+    }
+  }
+}

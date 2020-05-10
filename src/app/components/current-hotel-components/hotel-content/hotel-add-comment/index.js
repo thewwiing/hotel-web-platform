@@ -106,10 +106,10 @@ class AddComment extends React.Component {
                     <button className='hotel-comment-submit'
                             onClick={this.submit}
                     >
-                        <div>Отправить</div>
-                        <div>
+                        <span>Отправить</span>
+                        <span>
                             <FontAwesomeIcon icon={faPaperPlane} />
-                        </div>
+                        </span>
                     </button>
                 </div>
 

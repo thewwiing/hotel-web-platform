@@ -20,6 +20,7 @@ footer.footer {
         color: #fff;
         padding-bottom: 25px;
         margin-bottom: 30px;
+        font-size: 15px;
         border-bottom: 1px dotted rgba(255,255,255,0.11);
       }
       .footer-contacts-contents {
@@ -32,6 +33,7 @@ footer.footer {
           align-items: center;
           font-size: 17px;
           margin-bottom: 10px;
+          text-decoration: none;
 
           svg {
             width: 17px;
@@ -45,9 +47,13 @@ footer.footer {
             }
             &:last-child {
               margin-left: 10px;
-              cursor: pointer;
               color: #fff;
+              cursor: pointer;
               &:hover {color: $cyan}
+              a {
+                text-decoration: none;
+                color: inherit;
+              }
             }
 
           }
@@ -114,7 +120,8 @@ footer.footer {
           font-size: 17px;
           margin-bottom: 10px;
         }
-        span:last-child {
+        a:last-child {
+          text-decoration: none;
           color: $cyan;
           font-size: 22px;
           font-weight: 800;
@@ -122,13 +129,22 @@ footer.footer {
         }
       }
       .footer-help-btn {
-        padding: 15px 20px;
         background: $orange;
-        color: #fff;
-        font-weight: 700;
         @include Border-radius(4px);
         @include ButtonBaseStyles();
+        padding: 0;
 
+        a{
+          display: block;
+          width: 100%;
+          height: 100%;
+          padding: 15px 20px;
+          text-decoration: none;
+        }
+        span {
+          color: #fff;
+          font-weight: 700;
+        }
         svg { margin-left: 10px }
 
       }

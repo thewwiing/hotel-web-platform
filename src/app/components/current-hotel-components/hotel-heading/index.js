@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {faStar, faPhone, faMapMarkerAlt, faEnvelope, faCaretRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {compose} from "redux";
-import {withParallax} from "../../../common/parallax-component";
 
 class HotelHeading extends React.Component {
     componentDidMount() {
