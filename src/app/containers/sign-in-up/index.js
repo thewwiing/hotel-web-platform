@@ -38,7 +38,7 @@ class SignInUp extends React.Component {
 
     submit = () => {
         const {
-            props: {signInAction, signUpAction},
+            props: {signInAction, signUpAction, history},
             state: {isLoginActive}
         } = this;
         const state = this.state;
@@ -50,11 +50,17 @@ class SignInUp extends React.Component {
         if (isLoginActive && state['emailField']['isValid'] && state['passField']['isValid']) {
             signInAction({
                 email: state['emailField']['value'],
-                password: state['passField']['value']
+                password: state['passField']['value'],
+                history
             });
         }
         if (!isLoginActive && state['emailField']['isValid'] && state['nameField']['isValid'] && state['passField']['isValid']) {
-            signUpAction();
+            signUpAction({
+                email: state['emailField']['value'],
+                first_name: state['nameField']['value'].split(' ')[0],
+                second_name: state['nameField']['value'].split(' ')[1],
+                password: state['passField']['value']
+            });
         }
 
         this.setState(state);
@@ -62,9 +68,9 @@ class SignInUp extends React.Component {
 
     togglePage = (flag) => {
         this.setState({
-            emailField: {...this.state.emailField, isValid: true},
-            passField: {...this.state.passField, isValid: true},
-            nameField: {...this.state.nameField, isValid: true},
+            emailField: {value: '', isFocused: false, isValid: true},
+            passField: {value: '', isFocused: false, isValid: true},
+            nameField: {value: '', isFocused: false, isValid: true},
             isLoginActive: flag
         })
     };
@@ -125,6 +131,7 @@ class SignInUp extends React.Component {
                                            onChange={e => this.changeHandler(e.target.value, 'nameField')}
                                            onFocus={() => this.setState({nameField: {...nameField, isFocused: true}})}
                                            onBlur={() => this.setState({nameField: {...nameField, isFocused: false}})}
+                                           placeholder={'Петр Иванов'}
                                     />
                                     {
                                         !nameField['isValid'] &&
@@ -142,6 +149,7 @@ class SignInUp extends React.Component {
                                        onChange={e => this.changeHandler(e.target.value, 'emailField')}
                                        onFocus={() => this.setState({emailField: {...emailField, isFocused: true}})}
                                        onBlur={() => this.setState({emailField: {...emailField, isFocused: false}})}
+                                       placeholder='some@example.com'
                                 />
                                 {
                                     !emailField['isValid'] &&
@@ -184,6 +192,7 @@ class SignInUp extends React.Component {
 }
 
 SignInUp.propTypes = {
+    history: PropTypes.object.isRequired,
     toggleSignInUpModalAction: PropTypes.func.isRequired,
     signInAction: PropTypes.func.isRequired,
     signUpAction: PropTypes.func.isRequired

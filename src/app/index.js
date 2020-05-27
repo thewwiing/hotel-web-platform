@@ -14,26 +14,26 @@ import UserAccount from "./containers/user-account";
 
 import {
     getHotelInfoByIdAction,
-    initAppAction,
+    initAppAction, signOutAction,
+    testFetchAction,
     toggleSignInUpModalAction
 } from "../store/actions";
 
 class App extends React.Component {
-    static propTypes = {
-        toggleSignInUpModalAction: PropTypes.func.isRequired,
-        initAppAction: PropTypes.func.isRequired,
-        isSignInUpOpen: PropTypes.bool.isRequired
-    };
+
     componentDidMount() {
         // this.props.initAppAction();
         // this.props.getHotelInfoByIdAction();
+        this.props.testFetchAction();
     }
 
     render() {
         const {
             props: {
                 isSignInUpOpen,
-                toggleSignInUpModalAction
+                signOutAction,
+                toggleSignInUpModalAction,
+                isLoggedIn
             }
         } = this;
 
@@ -43,7 +43,10 @@ class App extends React.Component {
                     isSignInUpOpen &&
                     <SignInUp/>
                 }
-                <Header toggleSignInUpModalAction={toggleSignInUpModalAction} />
+                <Header toggleSignInUpModalAction={toggleSignInUpModalAction}
+                        isLoggedIn={isLoggedIn}
+                        signOutAction={signOutAction}
+                />
                 <main>
                     <Switch>
                         <Route
@@ -80,10 +83,19 @@ class App extends React.Component {
 
 
 
+App.propTypes = {
+    toggleSignInUpModalAction: PropTypes.func.isRequired,
+    signOutAction: PropTypes.func.isRequired,
+    testFetchAction: PropTypes.func.isRequired,
+    initAppAction: PropTypes.func.isRequired,
 
+    isSignInUpOpen: PropTypes.bool.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = state => ({
     isSignInUpOpen: state.AuthReducer.isSignInUpOpen,
+    isLoggedIn: state.AuthReducer.isLoggedIn,
     hotHotels: state.HomeReducer.hotHotels
 });
 const mapDispatchToProps = dispatch => {
@@ -91,7 +103,9 @@ const mapDispatchToProps = dispatch => {
         {
             initAppAction,
             toggleSignInUpModalAction,
-            getHotelInfoByIdAction
+            getHotelInfoByIdAction,
+            testFetchAction,
+            signOutAction
 
         },
         dispatch

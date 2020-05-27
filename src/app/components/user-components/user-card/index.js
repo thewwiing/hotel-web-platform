@@ -4,7 +4,11 @@ import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class UserCard extends React.Component {
+
     render() {
+        const {signOutAction} = this.props;
+
+
         return (
             <div className='user-card'>
                 <div className="user-card-image">
@@ -35,7 +39,7 @@ class UserCard extends React.Component {
                     </div>
 
                     <button className='user-card-btn'>
-                        <span>ВЫЙТИ</span>
+                        <span onClick={signOutAction}>ВЫЙТИ</span>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                     </button>
                 </div>
@@ -43,5 +47,9 @@ class UserCard extends React.Component {
         );
     }
 }
+
+UserCard.propTypes = {
+    signOutAction: PropTypes.func.isRequired
+};
 
 export default UserCard;

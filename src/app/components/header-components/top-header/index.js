@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 class TopHeader extends React.Component {
     render() {
         const {
-            props: {toggleSignInUpModalAction}
+            props: {toggleSignInUpModalAction, isLoggedIn}
         } = this;
 
         return(
@@ -20,25 +20,30 @@ class TopHeader extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="header-details">
-                    <button className='header-auth-btn'
-                            onClick={() => toggleSignInUpModalAction(true)}
-                    >
-                        <FontAwesomeIcon icon={faSignInAlt} />
-                        Войти
-                    </button>
-                    <button className='header-add-btn'>
-                        Добавить отель
-                        <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                </div>
+                {
+                    !isLoggedIn &&
+                    <div className="header-details">
+                        <button className='header-auth-btn'
+                                onClick={() => toggleSignInUpModalAction(true)}
+                        >
+                            <FontAwesomeIcon icon={faSignInAlt} />
+                            Войти
+                        </button>
+                        <button className='header-add-btn'>
+                            Добавить отель
+                            <FontAwesomeIcon icon={faPlus} />
+                        </button>
+                    </div>
+                }
             </div>
         );
     }
 }
 
 TopHeader.propTypes = {
-    toggleSignInUpModalAction: PropTypes.func.isRequired
+    toggleSignInUpModalAction: PropTypes.func.isRequired,
+
+    isLoggedIn: PropTypes.bool.isRequired
 };
 
 export default TopHeader;

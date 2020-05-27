@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {TransitionGroup, CSSTransition} from "react-transition-group";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faCaretRight,
@@ -19,7 +20,7 @@ class UserHeader extends React.Component {
     render() {
         const {
             state: {isMobileMenuOpened},
-            props: {activeNav, changeNav}
+            props: {activeNav, changeNav, signOutAction}
         } = this;
 
         return (
@@ -33,7 +34,7 @@ class UserHeader extends React.Component {
                     </div>
 
                     <div className="user-header-content">
-                        <UserCard/>
+                        <UserCard signOutAction={signOutAction}/>
 
                         <ul className="user-header-nav">
                             <li className={`user-nav-item ${activeNav === 'profile' ? 'active' : ''}`}
@@ -68,31 +69,40 @@ class UserHeader extends React.Component {
                             Меню
                             <FontAwesomeIcon icon={faBars}/>
                         </button>
-                        {
-                            isMobileMenuOpened &&
-                            <div className='user-mobile-menu'>
-                                <div className={`user-mobile-menu-item ${activeNav === 'profile' ? 'active' : ''}`}
-                                     onClick={() => changeNav('profile')}
-                                >
-                                    Главная
-                                </div>
-                                <div className={`user-mobile-menu-item ${activeNav === 'saved' ? 'active' : ''}`}
-                                     onClick={() => changeNav('saved')}
-                                >
-                                    Избранное
-                                </div>
-                                <div className={`user-mobile-menu-item ${activeNav === 'bookings' ? 'active' : ''}`}
-                                     onClick={() => changeNav('bookings')}
-                                >
-                                    Bookings
-                                </div>
-                                <div className={`user-mobile-menu-item ${activeNav === 'settings' ? 'active' : ''}`}
-                                     onClick={() => changeNav('settings')}
-                                >
-                                    Настройки
-                                </div>
-                            </div>
-                        }
+
+                        <CSSTransition
+                            in={isMobileMenuOpened}
+                            timeout={300}
+                            classNames="fade"
+                        >
+                            <Fragment>
+                                {
+                                    isMobileMenuOpened &&
+                                    <div className='user-mobile-menu'>
+                                        <div className={`user-mobile-menu-item ${activeNav === 'profile' ? 'active' : ''}`}
+                                             onClick={() => changeNav('profile')}
+                                        >
+                                            Главная
+                                        </div>
+                                        <div className={`user-mobile-menu-item ${activeNav === 'saved' ? 'active' : ''}`}
+                                             onClick={() => changeNav('saved')}
+                                        >
+                                            Избранное
+                                        </div>
+                                        <div className={`user-mobile-menu-item ${activeNav === 'bookings' ? 'active' : ''}`}
+                                             onClick={() => changeNav('bookings')}
+                                        >
+                                            Bookings
+                                        </div>
+                                        <div className={`user-mobile-menu-item ${activeNav === 'settings' ? 'active' : ''}`}
+                                             onClick={() => changeNav('settings')}
+                                        >
+                                            Настройки
+                                        </div>
+                                    </div>
+                                }
+                            </Fragment>
+                        </CSSTransition>
 
                     </div>
 
@@ -104,6 +114,8 @@ class UserHeader extends React.Component {
 }
 
 UserHeader.propTypes = {
+    signOutAction: PropTypes.func.isRequired,
+
     changeNav: PropTypes.func.isRequired,
     activeNav: PropTypes.string.isRequired
 };

@@ -4,6 +4,7 @@
 @import './common/classnames';
 @import './common/mixins';
 @import './common/variables';
+@import './common/animations';
 
 //LOGIN AND SIGN UP
 @import './modules/auth';
@@ -38,3 +39,4 @@
 
 //FOOTER STYLES
 @import './modules/footer/footer';
+
