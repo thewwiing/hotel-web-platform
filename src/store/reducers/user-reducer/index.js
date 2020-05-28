@@ -2,14 +2,16 @@ import * as actionTypes from '../../action-types';
 
 const initialState = {
     isUserLoggedIn: false,
+    userInfo: {}
 };
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case actionTypes.INIT_APP: {
+
+        case actionTypes.GET_USER_INFO_SUCCESS: {
             return {
                 ...state,
-                hotHotels: action.payload
+                userInfo: action.payload
             }
         }
         default:

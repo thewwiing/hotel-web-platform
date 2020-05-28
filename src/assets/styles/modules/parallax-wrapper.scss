@@ -16,11 +16,14 @@ section.parallax-wrapper {
   .react-parallax-content,
   .react-parallax
   {
+    overflow: unset !important;
     height: 100%;
+
   }
 
   .react-parallax-bgimage {
     opacity: .5;
+    width: 100% !important;
   }
 
 }

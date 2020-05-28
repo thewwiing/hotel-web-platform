@@ -5,7 +5,10 @@ import {withRouter} from "react-router";
 import {bindActionCreators} from "redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
+
+import SmallPreloader from '../../common/small-preloader';
 import {
+    clearAuthErrors,
     signInAction,
     signUpAction,
     toggleSignInUpModalAction
@@ -22,17 +25,24 @@ class SignInUp extends React.Component {
     componentDidMount() {
         const body = document.getElementsByTagName('body')[0];
         body.style.overflow = 'hidden';
+        document.addEventListener('keydown', this.handleKeyDown)
     }
 
     componentWillUnmount() {
         const body = document.getElementsByTagName('body')[0];
         body.style.overflow = '';
+        document.removeEventListener('keydown', this.handleKeyDown);
+        this.props.clearAuthErrors();
     }
 
     changeHandler = (value, field) => {
+        const {signInError, signUpError, clearAuthErrors} = this.props;
         const state = this.state;
+
         state[field]['value'] = value;
         state[field]['isValid'] = true;
+
+        if (signInError || signUpError) clearAuthErrors();
         this.setState(state);
     };
 
@@ -66,18 +76,24 @@ class SignInUp extends React.Component {
         this.setState(state);
     };
 
+    handleKeyDown = (e) => {
+        if (e.keyCode === 13) this.submit();
+        if (e.keyCode === 27) this.props.toggleSignInUpModalAction(false);
+    };
+
     togglePage = (flag) => {
         this.setState({
             emailField: {value: '', isFocused: false, isValid: true},
             passField: {value: '', isFocused: false, isValid: true},
             nameField: {value: '', isFocused: false, isValid: true},
             isLoginActive: flag
-        })
+        });
+        this.props.clearAuthErrors();
     };
 
     render() {
         const {
-            props: {toggleSignInUpModalAction},
+            props: {toggleSignInUpModalAction, isAuthPending, signInError, signUpError},
             state: {isLoginActive, emailField, nameField, passField}
         } = this;
 
@@ -119,6 +135,15 @@ class SignInUp extends React.Component {
                             ><FontAwesomeIcon icon={faTimes}/>
                             </div>
                         </div>
+
+                        {
+                            (signInError || signUpError) &&
+                            <div className="auth-global-error">
+                                {
+                                    isLoginActive ? signInError : signUpError
+                                }
+                            </div>
+                        }
 
                         <div className="auth-fields">
                             {
@@ -180,7 +205,11 @@ class SignInUp extends React.Component {
                             <button className='auth-submit-btn'
                                     onClick={this.submit}
                             >
-                                <span>{isLoginActive ? 'Войти' : 'Зарегистрироваться'}</span>
+                                {
+                                    isAuthPending
+                                        ? <SmallPreloader type={'ThreeDots'} width={'20px'} height={'20px'} color={'#39ACED'}/>
+                                        : <span>{isLoginActive ? 'Войти' : 'Зарегистрироваться'}</span>
+                                }
                             </button>
                         </div>
                     </div>
@@ -192,20 +221,31 @@ class SignInUp extends React.Component {
 }
 
 SignInUp.propTypes = {
-    history: PropTypes.object.isRequired,
     toggleSignInUpModalAction: PropTypes.func.isRequired,
     signInAction: PropTypes.func.isRequired,
-    signUpAction: PropTypes.func.isRequired
+    signUpAction: PropTypes.func.isRequired,
+    clearAuthErrors: PropTypes.func.isRequired,
+
+    history: PropTypes.object.isRequired,
+
+    signInError: PropTypes.string.isRequired,
+    signUpError: PropTypes.string.isRequired,
+
+    isAuthPending: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
+    isAuthPending: state.AuthReducer.isAuthPending,
+    signInError: state.AuthReducer.signInError,
+    signUpError: state.AuthReducer.signUpError,
 });
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
             toggleSignInUpModalAction,
             signInAction,
-            signUpAction
+            signUpAction,
+            clearAuthErrors
         },
         dispatch
     );

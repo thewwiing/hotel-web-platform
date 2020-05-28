@@ -11,6 +11,7 @@ import SearchResults from "./containers/search-results";
 import SignInUp from "./containers/sign-in-up";
 import CurrentHotel from "./containers/current-hotel";
 import UserAccount from "./containers/user-account";
+import BigPreloader from "./common/big-preloader";
 
 import {
     getHotelInfoByIdAction,
@@ -24,7 +25,7 @@ class App extends React.Component {
     componentDidMount() {
         // this.props.initAppAction();
         // this.props.getHotelInfoByIdAction();
-        this.props.testFetchAction();
+        // this.props.testFetchAction();
     }
 
     render() {
@@ -33,9 +34,12 @@ class App extends React.Component {
                 isSignInUpOpen,
                 signOutAction,
                 toggleSignInUpModalAction,
-                isLoggedIn
+                isLoggedIn,
+                isAppPending
             }
         } = this;
+
+        if (isAppPending) return <BigPreloader/>;
 
         return (
             <div className='main-page'>
@@ -90,13 +94,15 @@ App.propTypes = {
     initAppAction: PropTypes.func.isRequired,
 
     isSignInUpOpen: PropTypes.bool.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired
+    isLoggedIn: PropTypes.bool.isRequired,
+    isAppPending: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
     isSignInUpOpen: state.AuthReducer.isSignInUpOpen,
     isLoggedIn: state.AuthReducer.isLoggedIn,
-    hotHotels: state.HomeReducer.hotHotels
+    hotHotels: state.HomeReducer.hotHotels,
+    isAppPending: state.HomeReducer.isAppPending,
 });
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(

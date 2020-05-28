@@ -1,5 +1,11 @@
 import API from '../../../request-service';
-import {signInAction, signInSuccessAction, signOutSuccessAction} from "../../../store/actions";
+import {
+    signInAction,
+    signInFailedAction,
+    signInSuccessAction,
+    signOutSuccessAction,
+    signUpFailedAction
+} from "../../../store/actions";
 
 const authController = {};
 
@@ -10,7 +16,7 @@ authController.signUp = (store, action) => {
         'app/create/',
         action.payload,
         () => store.dispatch(signInAction({email, password})),
-        (error) => console.log(error)
+        () => store.dispatch(signUpFailedAction())
     )
 };
 
@@ -29,11 +35,12 @@ authController.signIn = (store, action) => {
             localStorage.setItem('accessToken', response.token);
             history.push('/user-account');
         },
-        (error) => console.log(error)
+        () => store.dispatch(signInFailedAction())
     );
 };
 
 authController.signOut = (store) => {
+    localStorage.removeItem('accessToken');
     store.dispatch(signOutSuccessAction())
     // API.POST(
     //     '/',

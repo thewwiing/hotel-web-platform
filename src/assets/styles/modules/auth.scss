@@ -94,6 +94,13 @@
         }
       }
 
+      .auth-global-error {
+        background: indianred;
+        padding: 10px;
+        color: #fff;
+        @include Border-radius(4px);
+      }
+
       .auth-fields {
         margin-top: 30px;
 
@@ -119,6 +126,7 @@
         margin-top: 30px;
 
         .auth-submit-btn {
+          position: relative;
           height: 40px;
           background: $brandColor;
           padding: 13px 35px;

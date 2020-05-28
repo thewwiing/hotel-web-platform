@@ -38,8 +38,10 @@ class UserCard extends React.Component {
                         </div>
                     </div>
 
-                    <button className='user-card-btn'>
-                        <span onClick={signOutAction}>ВЫЙТИ</span>
+                    <button className='user-card-btn'
+                            onClick={signOutAction}
+                    >
+                        <span>ВЫЙТИ</span>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                     </button>
                 </div>
