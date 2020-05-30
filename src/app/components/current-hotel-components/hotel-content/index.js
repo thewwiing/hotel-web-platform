@@ -5,11 +5,12 @@ import HotelComments from './hotel-content-comments';
 import HotelDescription from './hotel-content-description';
 import AddComment from "./hotel-add-comment";
 import HotelReservation from "./hotel-reservation";
+import {getPrice} from "../../../../shared/helpers";
 
 class HotelContent extends React.Component {
     render() {
         const {
-            props: {hotel}
+            props: {hotel, isLoggedIn}
         } = this;
 
         return (
@@ -18,9 +19,9 @@ class HotelContent extends React.Component {
                     <div className="hotel-content-container">
 
                         <div className="hotel-main-content">
-                            <HotelDescription descr={hotel['descr']}/>
-                            <HotelComments comments={hotel['commentsInfo']}/>
-                            <AddComment />
+                            <HotelDescription descr={hotel ? hotel['descr'] : ''}/>
+                            {/*<HotelComments comments={hotel['commentsInfo']}/>*/}
+                            <AddComment isLoggedIn={isLoggedIn}/>
                         </div>
 
                         <div className="hotel-add-content">
@@ -35,7 +36,9 @@ class HotelContent extends React.Component {
 }
 
 HotelContent.propTypes = {
-    hotel: PropTypes.object.isRequired
+    hotel: PropTypes.object.isRequired,
+
+    isLoggedIn: PropTypes.bool.isRequired
 };
 
 export default HotelContent;

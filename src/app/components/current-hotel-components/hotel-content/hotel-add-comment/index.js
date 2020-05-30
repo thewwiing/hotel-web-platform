@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown, faUser, faEnvelope, faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import {toggleSignInUpModalAction} from "../../../../../store/actions";
 
 class AddComment extends React.Component {
     state = {
@@ -35,6 +36,7 @@ class AddComment extends React.Component {
 
     render() {
         const {
+            props: {isLoggedIn, toggleSignInUpModalAction},
             state: {nameField, textField, emailField}
         } = this;
 
@@ -56,10 +58,12 @@ class AddComment extends React.Component {
                             <input className={`${!nameField['isFocused'] ? 'default' : ''}  ${!nameField['isValid'] ? 'err-field' : ''}`}
                                    type="text"
                                    placeholder="Ваше имя"
+                                   style={!isLoggedIn ? {opacity: .5} : {}}
                                    value={nameField['value']}
                                    onChange={e => this.changeHandler(e.target.value, 'nameField')}
                                    onFocus={() => this.setState({nameField: {...nameField, isFocused: true}})}
                                    onBlur={() => this.setState({nameField: {...nameField, isFocused: false}})}
+                                   disabled={!isLoggedIn}
                             />
                             {
                                 !nameField['isValid'] &&
@@ -74,10 +78,12 @@ class AddComment extends React.Component {
                             <input className={`${!emailField['isFocused'] ? 'default' : ''}  ${!emailField['isValid'] ? 'err-field' : ''}`}
                                    type="text"
                                    placeholder="Ваша почта"
+                                   style={!isLoggedIn ? {opacity: .5} : {}}
                                    value={emailField['value']}
                                    onChange={e => this.changeHandler(e.target.value, 'emailField')}
                                    onFocus={() => this.setState({emailField: {...emailField, isFocused: true}})}
                                    onBlur={() => this.setState({emailField: {...emailField, isFocused: false}})}
+                                   disabled={!isLoggedIn}
                             />
                             {
                                 !emailField['isValid'] &&
@@ -90,10 +96,12 @@ class AddComment extends React.Component {
                     <div className="hotel-comment-text-area">
                         <textarea className={`${!textField['isFocused'] ? 'default' : ''}  ${!textField['isValid'] ? 'err-field' : ''}`}
                                   placeholder='Ваш отзыв...'
+                                  style={!isLoggedIn ? {opacity: .5} : {}}
                                   value={textField['value']}
                                   onChange={e => this.changeHandler(e.target.value, 'textField')}
                                   onFocus={() => this.setState({textField: {...textField, isFocused: true}})}
                                   onBlur={() => this.setState({textField: {...textField, isFocused: false}})}
+                                  disabled={!isLoggedIn}
                         />
                         {
                             !textField['isValid'] &&
@@ -104,13 +112,24 @@ class AddComment extends React.Component {
                     </div>
 
                     <button className='hotel-comment-submit'
+                            style={!isLoggedIn ? {opacity: .5} : {}}
                             onClick={this.submit}
+                            disabled={!isLoggedIn}
                     >
                         <span>Отправить</span>
                         <span>
                             <FontAwesomeIcon icon={faPaperPlane} />
                         </span>
                     </button>
+
+                    {
+                        !isLoggedIn &&
+                        <div className="add-comm-attention">
+                            <span onClick={toggleSignInUpModalAction}>
+                                Авторизуйтесь
+                            </span>, чтобы оставить отзыв!!!
+                        </div>
+                    }
                 </div>
 
             </div>
@@ -119,16 +138,18 @@ class AddComment extends React.Component {
 }
 
 AddComment.propTypes = {
+    toggleSignInUpModalAction: PropTypes.func.isRequired,
 
+    isLoggedIn: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-
+    isLoggedIn: state.AuthReducer.isLoggedIn
 });
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-
+            toggleSignInUpModalAction
         },
         dispatch
     );

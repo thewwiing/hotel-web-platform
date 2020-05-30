@@ -52,6 +52,23 @@
       @include ButtonWithTwoFilled($orange, rgba(255,255,255,0.2));
     }
 
+    .add-comm-attention {
+      margin-top: 20px;
+      padding: 15px 10px;
+      background: $cyan;
+      background: rgba(57, 172, 237, .8);
+      color: #fff;
+
+      font-size: 17px;
+      font-weight: 300;
+      @include Border-radius(4px);
+
+      span {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
   }
 }
 

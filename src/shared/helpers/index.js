@@ -28,3 +28,18 @@ export const hotelSelectStyles = {
     indicatorSeparator: () => ({ display: 'none'}),
     valueContainer: (provided) => ({...provided, paddingLeft: "10px"}),
 };
+
+export const getPrice = (price) => {
+    if (isNaN(price)) return '???';
+    return Math.floor(price) * 400; // there must be currency transfer !!!
+};
+
+export const getRating = (rating) => {
+    if (isNaN(rating) || !rating) return 0;
+    return Number(rating.toFixed(1));
+};
+
+export const getRatingDescr = (rating) => {
+    if (isNaN(rating)) return 'Не известно';
+    return 'Не сделано еще'
+};

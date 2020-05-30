@@ -33,7 +33,7 @@ authController.signIn = (store, action) => {
         (response) => {
             store.dispatch(signInSuccessAction());
             localStorage.setItem('accessToken', response.token);
-            history.push('/user-account');
+            if (history.location.pathname === '/') history.push('/user-account');
         },
         () => store.dispatch(signInFailedAction())
     );

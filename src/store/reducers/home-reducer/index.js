@@ -25,6 +25,18 @@ export default (state = initialState, action) => {
                 isAppPending: false
             }
         }
+        // case actionTypes.GET_HOTEL_INFO_BY_ID: {
+        //     return {
+        //         ...state,
+        //         isAppPending: true
+        //     }
+        // }
+        // case actionTypes.GET_HOTEL_INFO_BY_ID_SUCCESS: {
+        //     return {
+        //         ...state,
+        //         isAppPending: false
+        //     }
+        // }
         default:
             return state;
 

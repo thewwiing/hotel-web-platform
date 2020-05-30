@@ -1,0 +1,38 @@
+.pagination {
+  width: 100%;
+  @include DisplayFlex();
+  justify-content: center;
+
+  .page-box {
+    position: relative;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    color: #888DA0;
+    background: #fff;
+    margin-left: 5px;
+
+    border: 1px solid #eee;
+    @include Border-radius(6px);
+
+    &.active {
+      background: $cyan;
+      color: #fff;
+    }
+
+    &:hover {
+      background: $yellow;
+      color: #fff;
+    }
+
+    &:first-child {margin: 0}
+
+    span,
+    svg
+    {
+      @include CenterPositioningAbsolute();
+    }
+
+    span {font-weight: 700}
+  }
+}

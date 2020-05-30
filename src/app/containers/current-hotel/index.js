@@ -7,6 +7,7 @@ import {withRouter} from "react-router";
 import HotelHeading from "../../components/current-hotel-components/hotel-heading";
 import HotelNav from "../../components/current-hotel-components/hotel-navigation";
 import HotelContent from "../../components/current-hotel-components/hotel-content";
+import {clearCurrentHotelAction, getHotelInfoByIdAction} from "../../../store/actions";
 
 class CurrentHotel extends React.Component {
     state = {
@@ -14,11 +15,20 @@ class CurrentHotel extends React.Component {
     };
 
     componentDidMount() {
+        const {getHotelInfoByIdAction, match: {params: {id}}} = this.props;
+        getHotelInfoByIdAction(id);
         window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const {currentHotel: {prevCurrentHotel}} = prevProps;
+        const {getHotelInfoByIdAction, currentHotel, match: {params: {id}}} = this.props;
+        if (!prevCurrentHotel && !currentHotel) getHotelInfoByIdAction(id);
     }
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
+        this.props.clearCurrentHotelAction();
     }
 
     handleScroll = () => {
@@ -32,14 +42,21 @@ class CurrentHotel extends React.Component {
     render() {
         const {
             state: {navIsFixed},
-            props: {currentHotel, history}
+            props: {
+                currentHotel,
+                history,
+                isLoggedIn
+            }
         } = this;
 
         return (
             <section className='hotel-wrapper'>
                 <HotelHeading hotel={currentHotel} history={history} />
-                <HotelNav isFixed={navIsFixed} />
-                <HotelContent hotel={currentHotel}/>
+                <HotelNav isFixed={navIsFixed}
+                />
+                <HotelContent hotel={currentHotel}
+                              isLoggedIn={isLoggedIn}
+                />
             </section>
 
         );
@@ -47,17 +64,24 @@ class CurrentHotel extends React.Component {
 }
 
 CurrentHotel.propTypes = {
+    getHotelInfoByIdAction: PropTypes.func.isRequired,
+    clearCurrentHotelAction: PropTypes.func.isRequired,
+
     currentHotel: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+
+    isLoggedIn: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-    currentHotel: state.HotelsReducer.currentHotel
+    currentHotel: state.HotelsReducer.currentHotel,
+    isLoggedIn: state.AuthReducer.isLoggedIn,
 });
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-
+            getHotelInfoByIdAction,
+            clearCurrentHotelAction
         },
         dispatch
     );

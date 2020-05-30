@@ -18,7 +18,9 @@ export const clearAuthErrors = payload => ({type: actionTypes.CLEAR_AUTH_ERRORS,
 export const getUserInfoAction = payload => ({type: actionTypes.GET_USER_INFO, payload});
 export const getUserInfoSuccessAction = payload => ({type: actionTypes.GET_USER_INFO_SUCCESS, payload});
 
+export const setSearchFields = payload => ({type: actionTypes.SET_SEARCH_FIELDS, payload});
 export const getHotelsAction = payload => ({type: actionTypes.GET_HOTELS, payload});
 export const getHotelsSuccessAction = payload => ({type: actionTypes.GET_HOTELS_SUCCESS, payload});
 export const getHotelInfoByIdAction = payload => ({type: actionTypes.GET_HOTEL_INFO_BY_ID, payload});
 export const getHotelInfoByIdSuccessAction = payload => ({type: actionTypes.GET_HOTEL_INFO_BY_ID_SUCCESS, payload});
+export const clearCurrentHotelAction = payload => ({type: actionTypes.CLEAR_CURRENT_HOTEL, payload});

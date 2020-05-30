@@ -84,6 +84,13 @@
   }
 }
 
+@mixin CenterPositioningAbsolute() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include Transform(translate(-50%, -50%));
+}
+
 @mixin ButtonWithTwoFilled($mainColor, $secondColor) {
   margin-top: 30px;
   width: 200px;

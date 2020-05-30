@@ -11,14 +11,15 @@ import PersonCount from "../../components/main-search-components/person-count-co
 import CalendarComponent from "../../components/main-search-components/calendar-component";
 
 import {
-    getHotelsAction
+    getHotelsAction,
+    setSearchFields
 } from "../../../store/actions";
 
 
 class MainSearch extends React.Component {
 
     state = {
-        hotel: "",
+        city: "",
         date: new Date(),
         adultCount: "1",
         childCount: "0"
@@ -30,6 +31,7 @@ class MainSearch extends React.Component {
 
         state[field] = value;
         this.setState(state);
+        this.props.setSearchFields({value, field});
     };
 
     controlPersonCounters = (type, field) => {
@@ -43,19 +45,26 @@ class MainSearch extends React.Component {
         this.setState(state);
     };
 
+    isValid = () => {
+        const {city} = this.state;
+        if (!city) return false;
+        return true;
+    };
+
     search = () => {
         const {
-            state: {hotel},
+            isValid,
+            state: {city},
             props: {getHotelsAction, history}
         } = this;
 
-        getHotelsAction({city: hotel, history})
+        isValid() && getHotelsAction({city, history})
     };
 
     render() {
         const {
             props: {history},
-            state: {hotel, date, adultCount, childCount}
+            state: {city, date, adultCount, childCount}
         } = this;
 
         return(
@@ -83,9 +92,9 @@ class MainSearch extends React.Component {
                                 <FontAwesomeIcon icon={faMapMarkerAlt}/>
                                 <input type="text"
                                        className="search-city-input"
-                                       placeholder="Отель..."
-                                       onChange={e => this.changeHandler(e.target.value, 'hotel')}
-                                       value={hotel}
+                                       placeholder="Город..."
+                                       onChange={e => this.changeHandler(e.target.value, 'city')}
+                                       value={city}
                                 />
                                 <FontAwesomeIcon icon={faDotCircle}/>
                             </div>
@@ -113,13 +122,17 @@ class MainSearch extends React.Component {
 MainSearch.propTypes = {
     getHotelsAction: PropTypes.func.isRequired,
 
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    searchFields: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    searchFields: state.HotelsReducer.searchFields
+});
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
+            setSearchFields,
             getHotelsAction
         },
         dispatch

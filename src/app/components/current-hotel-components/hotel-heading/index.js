@@ -4,6 +4,12 @@ import {faStar, faPhone, faMapMarkerAlt, faEnvelope, faCaretRight} from "@fortaw
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {compose} from "redux";
 
+import {
+    getPrice,
+    getRating,
+    getRatingDescr
+} from "../../../../shared/helpers";
+
 class HotelHeading extends React.Component {
     componentDidMount() {
         this.initStyle();
@@ -12,7 +18,9 @@ class HotelHeading extends React.Component {
     initStyle = () => {
         const {hotel} = this.props;
         const wrapper = document.getElementById('hotel-heading-wrapper');
-        wrapper.style['background-image'] = `linear-gradient(to bottom, rgba(6,27,65,0) 0%,rgba(6,27,65,0.95) 100%) ,url(${hotel['mainPhoto']})`;
+        const hotelBigDefLogo = 'https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+
+        wrapper.style['background-image'] = `linear-gradient(to bottom, rgba(6,27,65,0) 0%,rgba(6,27,65,0.95) 100%) ,url(${hotel['mainPhoto'] || hotelBigDefLogo})`;
     };
 
     getStarts = (count) => {
@@ -68,11 +76,11 @@ class HotelHeading extends React.Component {
                             <div className="hotel-heading-control">
                                 <div className="hotel-rank-info">
                                     <div className="rank-info">
-                                        <div>Очень хорошо</div>
-                                        <div>{hotel['commentsInfo']['amount']} комментария</div>
+                                        <div>{getRatingDescr(hotel['rating'])}</div>
+                                        <div>{hotel['commentsInfo'] && hotel['commentsInfo']['amount']} комментария</div>
                                     </div>
                                     <div className="rank-wrapper">
-                                        <span>{hotel['rank']}</span>
+                                        <span>{getRating(hotel['rating'])}</span>
                                     </div>
                                 </div>
                             </div>
@@ -86,8 +94,8 @@ class HotelHeading extends React.Component {
                                 <span>{hotel['name']}</span>
                             </div>
                             <div className="hotel-price-wrapper">
-                                <span>НОЧЬ</span>
-                                <span>{hotel['price']} т</span>
+                                <span>СУТКИ</span>
+                                <span>{getPrice(hotel['one-day_price'])} тг.</span>
                             </div>
                         </div>
                     </div>
