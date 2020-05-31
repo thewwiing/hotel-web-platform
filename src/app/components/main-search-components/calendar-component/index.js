@@ -1,59 +1,63 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {faCalendarCheck, faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-import {DateRangePicker} from "react-dates";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import {parseDate} from "../../../../shared/helpers";
 
 
 class CalendarComponent extends React.Component {
-    state = {
-        isCalendarOpen: false,
-        focusedInput: false,
-        startDate: null,
-        endDate: null,
-    };
-
-    toggleCalendar = (e) => {
-      this.setState({isCalendarOpen: !this.state.isCalendarOpen})
-    };
 
     render() {
         const {
-            props: {changeHandler},
-            state: {isCalendarOpen}
-        } = this;
+            changeHandler,
+            toggleCalendar,
+            title,
+            from,
+            to,
+            field,
+            isOpen
+        } = this.props;
+
+        const date = field === 'from' ? from : to;
 
         return (
             <div className='calendar-wrapper'>
                 <div className="calendar-input-wrapper"
-                    onClick={e => this.toggleCalendar(e)}
+                     onClick={toggleCalendar}
                 >
                     <FontAwesomeIcon icon={faCalendarCheck}/>
                     <input type="text"
                            className="calendar-input"
                            readOnly={true}
-                           placeholder={'Дата'}
+                           placeholder={title}
+                           value={parseDate(date)}
                     />
                     <FontAwesomeIcon icon={faCaretDown}/>
                 </div>
                 {
-                   isCalendarOpen &&
-                   <div className="calendar-content">
-                       {/*<DateRangePicker*/}
-                       {/*    startDate={this.state.startDate} // momentPropTypes.momentObj or null,*/}
-                       {/*    startDateId="startDate"*/}
-                       {/*    endDate={this.state.endDate} // momentPropTypes.momentObj or null,*/}
-                       {/*    endDateId="endDate"*/}
-                       {/*    onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,*/}
-                       {/*    focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,*/}
-                       {/*    onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,*/}
-                       {/*/>*/}
-                   </div>
+                   isOpen &&
+                   <Calendar className='filter-calendar'
+                             onChange={date => changeHandler(date, 'to')}
+                             value={date}
+                             minDate={field === 'to' ? from : null}
+                             maxDate={field === 'from' ? to : null}
+                   />
                 }
             </div>
         );
     }
 }
+
+CalendarComponent.propTypes = {
+    changeHandler: PropTypes.func.isRequired,
+    toggleCalendar: PropTypes.func.isRequired,
+
+    title: PropTypes.string.isRequired,
+    field: PropTypes.string.isRequired,
+
+    isOpen: PropTypes.bool.isRequired,
+};
 
 export default CalendarComponent;

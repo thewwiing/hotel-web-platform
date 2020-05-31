@@ -1,0 +1,11 @@
+.filter-calendar {
+  min-width: 250px;
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 10px);
+  left: 0;
+  color: #F9B90E;
+  padding: 10px;
+  border: 1px solid #EEEEEE;
+  @include Border-radius(4px);
+}

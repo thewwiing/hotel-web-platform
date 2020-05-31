@@ -1,0 +1,92 @@
+.search-filters {
+  width: 25%;
+  padding-right: 30px;
+
+  .main-search-filters {
+    padding: 10px;
+    width: 100%;
+    background: $cyan;
+
+    @include Border-radius(4px);
+
+    .main-filter-title {
+      color: #fff;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .main-filters-fields {
+
+      .main-f-field-item {
+        position: relative;
+        margin-top: 10px;
+        @include DisplayFlex();
+        flex-direction: column;
+
+        span {
+          color: #fff;
+          font-weight: 700;
+          font-size: 15px;
+          margin-bottom: 5px;
+        }
+
+        .field-item {
+          padding: 0 10px;
+          width: 100%;
+          height: 40px;
+          color: #333;
+          font-size: 14px;
+          background: #fff;
+
+          outline: none;
+          border: 1px solid #EEEEEE;
+          @include Border-radius(4px);
+
+        }
+
+        .calendar-wrapper {
+          position: relative;
+          cursor: pointer;
+          @include DisplayFlex();
+          align-items: center;
+
+          span {
+            color: #333;
+            font-size: 14px;
+            font-weight: initial;
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .main-filters-submit-row {
+      margin-top: 10px;
+      width: 100%;
+      @include DisplayFlex();
+      justify-content: flex-end;
+
+      button {
+        width: 100px;
+        height: 40px;
+        padding: 0 10px;
+        text-align: center;
+        background: $yellow;
+        color: #fff;
+
+        font-size: 15px;
+        font-weight: 700;
+        @include Border-radius(4px);
+        @include ButtonBaseStyles();
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .search-filters{
+    width: 100%;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+}

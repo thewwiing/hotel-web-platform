@@ -1,7 +1,9 @@
 .pagination {
   width: 100%;
   @include DisplayFlex();
+  @include Flex-wrap(wrap);
   justify-content: center;
+
 
   .page-box {
     position: relative;

@@ -1,5 +1,6 @@
 import API from '../../../request-service';
 import {getHotelInfoByIdSuccessAction, getHotelsSuccessAction} from "../../../store/actions";
+import {parseDate} from "../../../shared/helpers";
 
 const hotelsController = {};
 
@@ -7,8 +8,8 @@ hotelsController.getHotels = (store, action) => {
     const {city, history, from, to, count, page} = action.payload;
     const body = {
         city,
-        from: "6-4-2020",
-        to: "30-4-2020",
+        from: parseDate(from),
+        to: parseDate(to),
         count,
         page
     };
@@ -33,7 +34,6 @@ hotelsController.getHotelInfoById = (store, action) => {
         'app/hotel/',
         body,
         (response) => {
-            console.log(response.data);
             store.dispatch(getHotelInfoByIdSuccessAction(response.data));
         },
         (err) => console.log(err)

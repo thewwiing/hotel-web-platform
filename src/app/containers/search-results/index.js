@@ -5,6 +5,7 @@ import {bindActionCreators} from "redux";
 import {Redirect} from "react-router";
 
 import SearchItem  from "../../components/search-results-components/result-item";
+import Filters  from "../../components/search-filters";
 import Pagination from "../../common/pagination";
 
 import {getHotelsAction, setSearchFields, toggleSignInUpModalAction} from "../../../store/actions";
@@ -15,10 +16,9 @@ class SearchResults extends React.Component {
         if (!searchResults && localStorage.getItem('searchFields')) getHotelsAction(searchFields);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const {searchFields: {prevPage}} = prevProps;
-        const {searchFields: {page}, getHotelsAction, searchFields} = this.props;
-        if (prevPage !== page) {
+    componentDidUpdate(prevProps) {
+        const {getHotelsAction, searchFields} = this.props;
+        if (JSON.stringify(searchFields) !== JSON.stringify(prevProps.searchFields)) {
             getHotelsAction(searchFields);
         }
     }
@@ -28,26 +28,12 @@ class SearchResults extends React.Component {
         if (!isLoggedIn) toggleSignInUpModalAction(true);
     };
 
-    pagChangeHandler = (value) => {
-        const {setSearchFields} = this.props;
-        setSearchFields({value, field: "page"});
-    };
-
-    pagDirChangeHandler = (page, pageAmount, dir) => {
-        const {setSearchFields} = this.props;
-        if (page === 1 && dir === 'prev') return;
-        if (page === pageAmount && dir === 'next') return;
-        if (dir === 'prev') setSearchFields({value: page - 1, field: "page"});
-        if (dir === 'next') setSearchFields({value: page + 1, field: "page"});
-    };
-
-
     render() {
         const {
             toggleFav,
-            pagChangeHandler,
-            pagDirChangeHandler,
             props: {
+                setSearchFields,
+                getHotelsAction,
                 searchResults,
                 searchFields,
                 totalCount
@@ -55,6 +41,7 @@ class SearchResults extends React.Component {
         } = this;
 
         if (!searchResults && !localStorage.getItem('searchFields')) return <Redirect to={'/'}/>;
+
         return (
             <div className='search-results-wrapper'>
                 <div className="container">
@@ -62,19 +49,20 @@ class SearchResults extends React.Component {
 
                     <div className="search-results-container">
 
-                        <div className="search-results-filters">
-                        {/*  There will be filters  */}
-                        </div>
+                        <Filters searchFields={searchFields}
+                                 getHotelsAction={getHotelsAction}
+                                 setSearchFields={setSearchFields}
+                        />
 
                         <div className="search-results-content">
                             <div className="search-listing-heading">
                                 <span>Результаты по: </span>
-                                <span>{searchFields['city']}</span> -> {searchResults ? searchResults.length : 0} вариантов
+                                <span>{searchFields['city']}</span> -> {totalCount} вариантов
                             </div>
                             <div className="search-listing">
                                 {
                                     searchResults && searchResults.map((item) => (
-                                        <SearchItem key={item['hotel_id']}
+                                        <SearchItem key={item['hotel_id'].toString()}
                                                     hotel={item}
                                                     toggleFav={toggleFav}
                                         />
@@ -84,8 +72,7 @@ class SearchResults extends React.Component {
                             <Pagination page={searchFields['page']}
                                         pageSize={searchFields['count']}
                                         totalCount={totalCount}
-                                        pageChangeHandler={pagChangeHandler}
-                                        pageDirChangeHandler={pagDirChangeHandler}
+                                        pageChangeHandler={ (value) => setSearchFields([{value, field: "page"}])}
                             />
                         </div>
 

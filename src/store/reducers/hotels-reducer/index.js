@@ -2,14 +2,14 @@ import * as actionTypes from '../../action-types';
 
 const initialState = {
     searchResults: null,
-    totalCount: 1,
+    totalCount: 0,
 
     isCurrentHotelPending: false,
 
     searchFields: {
         city: localStorage.getItem('searchFields') ? JSON.parse(localStorage.getItem('searchFields'))['city'] : '',
-        from: localStorage.getItem('searchFields') ? JSON.parse(localStorage.getItem('searchFields'))['from'] : '',
-        to: localStorage.getItem('searchFields') ? JSON.parse(localStorage.getItem('searchFields'))['to'] : '',
+        from: localStorage.getItem('searchFields') ? JSON.parse(localStorage.getItem('searchFields'))['from'] : null,
+        to: localStorage.getItem('searchFields') ? JSON.parse(localStorage.getItem('searchFields'))['to'] : null,
         page: localStorage.getItem('searchFields') && JSON.parse(localStorage.getItem('searchFields'))['page'] ? JSON.parse(localStorage.getItem('searchFields'))['page'] : 1,
         count: 10,
     },
@@ -95,10 +95,12 @@ export default (state = initialState, action) => {
         }
 
         case actionTypes.SET_SEARCH_FIELDS: {
-            const {value, field} =  action.payload;
             const fields = {...state.searchFields};
+            const items = action.payload;
+            items.forEach(filter => {
+                fields[filter['field']] = filter['value']
+            });
 
-            fields[field] = value;
             localStorage.setItem('searchFields', JSON.stringify(fields));
 
             return {

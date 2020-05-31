@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const hotelSelectStyles = {
     control: (provided, { isFocused, selectProps: { width }}) => ({
         borderRadius: isFocused ? '4px' : '4px',
@@ -28,6 +30,19 @@ export const hotelSelectStyles = {
     indicatorSeparator: () => ({ display: 'none'}),
     valueContainer: (provided) => ({...provided, paddingLeft: "10px"}),
 };
+
+export const parseDate = (date) => {
+    if (!date) return '';
+    const splitted = moment(date).format('L').split('/');
+    return splitted[1] + "-" + splitted[0] + "-" + splitted[2];
+};
+
+// export const parseTwoDatesArray = (dateArray) => {
+//     if (!dateArray) return '';
+//     const from = moment(dateArray[0]).format('L').split('/');
+//     const to = moment(dateArray[1]).format('L').split('/');
+//     return from + " - " + to;
+// };
 
 export const getPrice = (price) => {
     if (isNaN(price)) return '???';

@@ -23,6 +23,9 @@
 @import './modules/search-results/search-results';
 @import './modules/search-results/result-item';
 
+//SEARCH FILTERS
+@import './modules/search-filters';
+
 //CURRENT HOTEL
 @import './modules/current-hotel/current-hotel';
 @import './modules/current-hotel/hotel-heading/hotel-heading';
@@ -39,6 +42,9 @@
 
 //FOOTER STYLES
 @import './modules/footer/footer';
+
+//CALENDARS
+@import './modules/calendar';
 
 //PRELOADERS
 @import './modules/preloader';
