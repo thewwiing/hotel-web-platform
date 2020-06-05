@@ -1,4 +1,6 @@
-.user-info {
+.user-info,
+.user-settings
+{
 
   .user-info-fields {
     .user-info-item {
@@ -39,6 +41,22 @@
         margin-bottom: 40px;
       }
     }
+  }
+
+  .user-settings-global-error {
+    margin-bottom: 10px;
+    background: indianred;
+    padding: 10px;
+    color: #fff;
+    @include Border-radius(4px);
+  }
+
+  .user-settings-success {
+    margin-bottom: 10px;
+    background: green;
+    padding: 10px;
+    color: #fff;
+    @include Border-radius(4px);
   }
 
   .user-info-submit {

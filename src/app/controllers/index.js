@@ -11,6 +11,11 @@ export const CONTROLLERS = {
     [actionTypes.SIGN_OUT]: (store, action) => authController.signOut(store, action),
 
     [actionTypes.GET_USER_INFO]: (store, action) => userController.getUserInfo(store, action),
+    [actionTypes.UPDATE_USER_INFO]: (store, action) => userController.updateUserInfo(store, action),
+    [actionTypes.GET_USER_FAVOURITES]: (store, action) => userController.getUserFavourites(store, action),
+    [actionTypes.ADD_FAVOURITES]: (store, action) => userController.addToFavourites(store, action),
+    [actionTypes.CHECK_FOR_OLD_PASSWORD]: (store, action) => userController.checkForOldPassword(store, action),
+    [actionTypes.CHANGE_PASSWORD]: (store, action) => userController.changePassword(store, action),
 
     [actionTypes.GET_HOTELS]: (store, action) => hotelsController.getHotels(store, action),
     [actionTypes.GET_HOTEL_INFO_BY_ID]: (store, action) => hotelsController.getHotelInfoById(store, action),

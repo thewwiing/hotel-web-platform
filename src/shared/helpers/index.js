@@ -44,6 +44,8 @@ export const parseDate = (date) => {
 //     return from + " - " + to;
 // };
 
+export const isAllValid = (state) => !Object.values(state).find(field => !field['isValid']);
+
 export const getPrice = (price) => {
     if (isNaN(price)) return '???';
     return Math.floor(price) * 400; // there must be currency transfer !!!

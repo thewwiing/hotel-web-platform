@@ -9,20 +9,38 @@ import {
     faSave,
     faMapMarkerAlt
 } from "@fortawesome/free-solid-svg-icons";
+import {getUserInfoAction, updateUserInfoAction} from "../../../../store/actions";
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
+import {bindActionCreators} from "redux";
+import {REGS} from "../../../../shared/regex";
+import {isAllValid} from "../../../../shared/helpers";
 
 class UserInfo extends React.Component {
 
     state = {
-        emailField: {value: '', isFocused: false, isValid: true},
-        phoneField: {value: '', isFocused: false, isValid: true},
-        nameField: {value: '', isFocused: false, isValid: true},
-        addressField: {value: '', isFocused: false, isValid: true},
+        email: {value: '', isFocused: false, isValid: true},
+        phone_number: {value: '', isFocused: false, isValid: true},
+        first_name: {value: '', isFocused: false, isValid: true},
+        second_name: {value: '', isFocused: false, isValid: true},
+        address: {value: '', isFocused: false, isValid: true},
     };
+
+    componentDidMount() {
+        this.props.getUserInfoAction();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { fillFields, props: {userInfo}} = this;
+        if (JSON.stringify(userInfo) !== JSON.stringify(prevProps.userInfo)) {
+            fillFields(userInfo);
+        }
+    }
 
     changeHandler = (value, field) => {
         const state = this.state;
 
-        if (field === 'phoneField' && value.length > 11) return;
+        if (field === 'phone_number' && value.length > 11) return;
 
         state[field]['value'] = value;
         state[field]['isValid'] = true;
@@ -31,21 +49,40 @@ class UserInfo extends React.Component {
 
     submit = () => {
         const state = this.state;
+        const userInfo = this.props.userInfo;
+        const body = {};
 
-        if(state['emailField']['value'].length < 4) state['emailField']['isValid'] = false;
-        if(state['phoneField']['value'].length < 11) state['phoneField']['isValid'] = false;
-        if(state['nameField']['value'].length < 4) state['nameField']['isValid'] = false;
-        if(state['addressField']['value'].length < 6) state['addressField']['isValid'] = false;
+        for (let key in state) {
+            if (state.hasOwnProperty(key)) {
+                state[key]['isValid'] = REGS[key].test(state[key]['value']);
+                body[key] = state[key]['value'];
+            }
+        }
 
-        if (state['emailField']['isValid'] && state['nameField']['isValid'] && state['phoneField']['isValid'] && state['addressField']['isValid']) {
-            alert('saved');
+        if (isAllValid(state)) {
+            for (let key in body) {
+                if (body.hasOwnProperty(key)) {
+                    if (body[key] === userInfo[key]) delete body[key]
+                }
+            }
+            this.props.updateUserInfoAction(body)
         }
         this.setState(state);
     };
 
+    fillFields = (userInfo) => {
+        this.setState({
+            email:   {value: userInfo['email'] || '', isFocused: false, isValid: true},
+            phone_number:   {value: userInfo['phone_number'] || '', isFocused: false, isValid: true},
+            first_name:    {value: userInfo['first_name'] || '', isFocused: false, isValid: true},
+            second_name:    {value: userInfo['second_name'] || '', isFocused: false, isValid: true},
+            address: {value: userInfo['address'] || '', isFocused: false, isValid: true},
+        });
+    };
+
     render() {
         const {
-            state: {nameField, emailField, addressField, phoneField}
+            state: {first_name, second_name, email, address, phone_number}
         } = this;
 
         return (
@@ -56,80 +93,100 @@ class UserInfo extends React.Component {
                 </div>
 
                 <div className="user-info-fields">
-                    <div className={`user-info-item ${!nameField['isValid'] ? 'error' : ''}`}>
-                        <span className={`${!nameField['isValid'] ? 'err-text' : ''}`}>Полное имя:</span>
+                    <div className={`user-info-item ${!first_name['isValid'] ? 'error' : ''}`}>
+                        <span className={`${!first_name['isValid'] ? 'err-text' : ''}`}>Имя:</span>
                         <div className={`user-field-wrapper`}>
                             <FontAwesomeIcon icon={faUser}/>
-                            <input className={`${!nameField['isFocused'] ? 'default' : ''}  ${!nameField['isValid'] ? 'err-field' : ''}`}
+                            <input className={`${!first_name['isFocused'] ? 'default' : ''}  ${!first_name['isValid'] ? 'err-field' : ''}`}
                                    type="text"
-                                   placeholder='Имя Фамилия'
-                                   value={nameField['value']}
-                                   onChange={e => this.changeHandler(e.target.value, 'nameField')}
-                                   onFocus={() => this.setState({nameField: {...nameField, isFocused: true}})}
-                                   onBlur={() => this.setState({nameField: {...nameField, isFocused: false}})}
+                                   placeholder='Имя'
+                                   value={first_name['value']}
+                                   onChange={e => this.changeHandler(e.target.value, 'first_name')}
+                                   onFocus={() => this.setState({first_name: {...first_name, isFocused: true}})}
+                                   onBlur={() => this.setState({first_name: {...first_name, isFocused: false}})}
                             />
                             {
-                                !nameField['isValid'] &&
+                                !first_name['isValid'] &&
                                 <div className="user-info-error" style={{color: 'red'}}>
                                     Имя не валидно
                                 </div>
                             }
                         </div>
                     </div>
-                    <div className={`user-info-item ${!emailField['isValid'] ? 'error' : ''}`}>
-                        <span className={`${!emailField['isValid'] ? 'err-text' : ''}`}>Почта:</span>
+                    <div className={`user-info-item ${!second_name['isValid'] ? 'error' : ''}`}>
+                        <span className={`${!second_name['isValid'] ? 'err-text' : ''}`}>Фамилия:</span>
                         <div className={`user-field-wrapper`}>
-                            <FontAwesomeIcon icon={faEnvelope}/>
-                            <input className={`${!emailField['isFocused'] ? 'default' : ''}  ${!emailField['isValid'] ? 'err-field' : ''}`}
+                            <FontAwesomeIcon icon={faUser}/>
+                            <input className={`${!second_name['isFocused'] ? 'default' : ''}  ${!second_name['isValid'] ? 'err-field' : ''}`}
                                    type="text"
-                                   placeholder='example@mail.ru'
-                                   value={emailField['value']}
-                                   onChange={e => this.changeHandler(e.target.value, 'emailField')}
-                                   onFocus={() => this.setState({emailField: {...emailField, isFocused: true}})}
-                                   onBlur={() => this.setState({emailField: {...emailField, isFocused: false}})}
+                                   placeholder='Фамилия'
+                                   value={second_name['value']}
+                                   onChange={e => this.changeHandler(e.target.value, 'second_name')}
+                                   onFocus={() => this.setState({second_name: {...second_name, isFocused: true}})}
+                                   onBlur={() => this.setState({second_name: {...second_name, isFocused: false}})}
                             />
                             {
-                                !emailField['isValid'] &&
+                                !second_name['isValid'] &&
+                                <div className="user-info-error" style={{color: 'red'}}>
+                                    Фамилия не валидна
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div className={`user-info-item ${!email['isValid'] ? 'error' : ''}`}>
+                        <span className={`${!email['isValid'] ? 'err-text' : ''}`}>Почта:</span>
+                        <div className={`user-field-wrapper`}>
+                            <FontAwesomeIcon icon={faEnvelope}/>
+                            <input className={`${!email['isFocused'] ? 'default' : ''}  ${!email['isValid'] ? 'err-field' : ''}`}
+                                   type="text"
+                                   placeholder='example@mail.ru'
+                                   value={email['value']}
+                                   onChange={e => this.changeHandler(e.target.value, 'email')}
+                                   onFocus={() => this.setState({email: {...email, isFocused: true}})}
+                                   onBlur={() => this.setState({email: {...email, isFocused: false}})}
+                            />
+                            {
+                                !email['isValid'] &&
                                 <div className="user-info-error" style={{color: 'red'}}>
                                     Почта на валидна
                                 </div>
                             }
                         </div>
                     </div>
-                    <div className={`user-info-item ${!phoneField['isValid'] ? 'error' : ''}`}>
-                        <span className={`${!phoneField['isValid'] ? 'err-text' : ''}`}>Телефон:</span>
+                    <div className={`user-info-item ${!phone_number['isValid'] ? 'error' : ''}`}>
+                        <span className={`${!phone_number['isValid'] ? 'err-text' : ''}`}>Телефон:</span>
                         <div className={`user-field-wrapper`}>
                             <FontAwesomeIcon icon={faPhone}/>
-                            <input className={`${!phoneField['isFocused'] ? 'default' : ''}  ${!phoneField['isValid'] ? 'err-field' : ''}`}
+                            <input className={`${!phone_number['isFocused'] ? 'default' : ''}  ${!phone_number['isValid'] ? 'err-field' : ''}`}
                                    type="number"
                                    placeholder='+77771112233'
-                                   value={phoneField['value']}
-                                   onChange={e => this.changeHandler(e.target.value, 'phoneField')}
-                                   onFocus={() => this.setState({phoneField: {...phoneField, isFocused: true}})}
-                                   onBlur={() => this.setState({phoneField: {...phoneField, isFocused: false}})}
+                                   value={phone_number['value']}
+                                   onChange={e => this.changeHandler(e.target.value, 'phone_number')}
+                                   onFocus={() => this.setState({phone_number: {...phone_number, isFocused: true}})}
+                                   onBlur={() => this.setState({phone_number: {...phone_number, isFocused: false}})}
                             />
                             {
-                                !phoneField['isValid'] &&
+                                !phone_number['isValid'] &&
                                 <div className="user-info-error" style={{color: 'red'}}>
                                     Номер не валиден
                                 </div>
                             }
                         </div>
                     </div>
-                    <div className={`user-info-item ${!addressField['isValid'] ? 'error' : ''}`}>
-                        <span className={`${!addressField['isValid'] ? 'err-text' : ''}`}>Адрес:</span>
+                    <div className={`user-info-item ${!address['isValid'] ? 'error' : ''}`}>
+                        <span className={`${!address['isValid'] ? 'err-text' : ''}`}>Адрес:</span>
                         <div className={`user-field-wrapper`}>
                             <FontAwesomeIcon icon={faMapMarkerAlt}/>
-                            <input className={`${!addressField['isFocused'] ? 'default' : ''}  ${!addressField['isValid'] ? 'err-field' : ''}`}
+                            <input className={`${!address['isFocused'] ? 'default' : ''}  ${!address['isValid'] ? 'err-field' : ''}`}
                                    type="text"
                                    placeholder='Алматы, Каскелен'
-                                   value={addressField['value']}
-                                   onChange={e => this.changeHandler(e.target.value, 'addressField')}
-                                   onFocus={() => this.setState({addressField: {...addressField, isFocused: true}})}
-                                   onBlur={() => this.setState({addressField: {...addressField, isFocused: false}})}
+                                   value={address['value']}
+                                   onChange={e => this.changeHandler(e.target.value, 'address')}
+                                   onFocus={() => this.setState({address: {...address, isFocused: true}})}
+                                   onBlur={() => this.setState({address: {...address, isFocused: false}})}
                             />
                             {
-                                !addressField['isValid'] &&
+                                !address['isValid'] &&
                                 <div className="user-info-error" style={{color: 'red'}}>
                                     Минимум 6 символов
                                 </div>
@@ -151,4 +208,26 @@ class UserInfo extends React.Component {
     }
 }
 
-export default UserInfo;
+UserInfo.propTypes = {
+    getUserInfoAction: PropTypes.func.isRequired,
+    updateUserInfoAction: PropTypes.func.isRequired,
+
+    userInfo: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    userInfo: state.UserReducer.userInfo
+});
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(
+        {
+            getUserInfoAction,
+            updateUserInfoAction
+        },
+        dispatch
+    );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+    withRouter(UserInfo)
+);

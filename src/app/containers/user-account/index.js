@@ -8,7 +8,6 @@ import UserHeader from "../../components/user-components/user-header";
 import UserContent from "../../components/user-components/user-content";
 
 import {
-    getUserInfoAction,
     signOutAction
 } from "../../../store/actions";
 
@@ -16,10 +15,6 @@ class UserAccount extends React.Component {
     state = {
         activeNav: 'profile'
     };
-
-    componentDidMount() {
-        this.props.getUserInfoAction();
-    }
 
     render() {
         const {
@@ -43,7 +38,6 @@ class UserAccount extends React.Component {
 
 UserAccount.propTypes = {
     signOutAction: PropTypes.func.isRequired,
-    getUserInfoAction: PropTypes.func.isRequired,
 
     history: PropTypes.object.isRequired,
     isLoggedIn: PropTypes.bool.isRequired
@@ -55,7 +49,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            getUserInfoAction,
             signOutAction
         },
         dispatch

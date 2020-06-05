@@ -22,12 +22,6 @@ import {
 
 class App extends React.Component {
 
-    componentDidMount() {
-        // this.props.initAppAction();
-        // this.props.getHotelInfoByIdAction();
-        // this.props.testFetchAction();
-    }
-
     render() {
         const {
             props: {

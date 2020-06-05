@@ -182,6 +182,27 @@ section.user-account {
 
     }
   }
+
+  .user-content-header {
+    padding: 20px 30px;
+    background: $cyan;
+    color: #fff;
+    @include Border-radius(4px 4px 0 0);
+
+    h3 {
+      font-weight: 700;
+      font-size: 18px;
+    }
+  }
+
+  .user-content-empty {
+    padding: 20px 30px;
+    color: #333;
+    font-size: 17px;
+    font-weight: 600;
+    font-style: italic;
+    text-decoration: underline;
+  }
 }
 
 @media only screen and (max-width: 992px) {

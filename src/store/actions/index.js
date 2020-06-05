@@ -17,6 +17,19 @@ export const clearAuthErrors = payload => ({type: actionTypes.CLEAR_AUTH_ERRORS,
 
 export const getUserInfoAction = payload => ({type: actionTypes.GET_USER_INFO, payload});
 export const getUserInfoSuccessAction = payload => ({type: actionTypes.GET_USER_INFO_SUCCESS, payload});
+export const updateUserInfoAction = payload => ({type: actionTypes.UPDATE_USER_INFO, payload});
+export const updateUserInfoSuccessAction = payload => ({type: actionTypes.UPDATE_USER_INFO_SUCCESS, payload});
+export const getUserFavouritesAction = payload => ({type: actionTypes.GET_USER_FAVOURITES, payload});
+export const getUserFavouritesSuccessAction = payload => ({type: actionTypes.GET_USER_FAVOURITES_SUCCESS, payload});
+export const addFavouritesAction = payload => ({type: actionTypes.ADD_FAVOURITES, payload});
+export const addFavouritesSuccessAction = payload => ({type: actionTypes.ADD_FAVOURITES_SUCCESS, payload});
+export const checkForOldPasswordAction = payload => ({type: actionTypes.CHECK_FOR_OLD_PASSWORD, payload});
+export const checkForOldPasswordSuccessAction = payload => ({type: actionTypes.CHECK_FOR_OLD_PASSWORD_SUCCESS, payload});
+export const checkForOldPasswordFailedAction = payload => ({type: actionTypes.CHECK_FOR_OLD_PASSWORD_FAILED, payload});
+export const changePasswordAction = payload => ({type: actionTypes.CHANGE_PASSWORD, payload});
+export const changePasswordSuccessAction = payload => ({type: actionTypes.CHANGE_PASSWORD_SUCCESS, payload});
+export const changePasswordFailedAction = payload => ({type: actionTypes.CHANGE_PASSWORD_FAILED, payload});
+export const clearSettingsAction = payload => ({type: actionTypes.CLEAR_SETTINGS, payload})
 
 export const setSearchFields = payload => ({type: actionTypes.SET_SEARCH_FIELDS, payload});
 export const getHotelsAction = payload => ({type: actionTypes.GET_HOTELS, payload});
