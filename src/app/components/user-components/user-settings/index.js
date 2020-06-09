@@ -11,6 +11,7 @@ import UserContentHeader from '../user-content-header';
 
 import {checkForOldPasswordAction, clearSettingsAction} from "../../../../store/actions";
 import {isAllValid} from "../../../../shared/helpers";
+import MediumPreloader from "../../../common/medium-preloader";
 
 
 
@@ -78,7 +79,7 @@ class UserSettings extends React.Component {
 
     render() {
         const {
-            props: {passwordError, settingsSuccess},
+            props: {passwordError, settingsSuccess, isUserPending},
             state: {old_password, new_password, new_password2, textError}
         } = this;
 
@@ -86,6 +87,11 @@ class UserSettings extends React.Component {
 
         return (
             <div className='user-settings'>
+                {
+                    isUserPending &&
+                    <MediumPreloader type={'Oval'} width={'25%'} height={'auto'} color={'#17458B'}/>
+                }
+
                 <UserContentHeader title='Сменить пароль'/>
                 <div className="user-settings-fields" style={{marginTop: '30px'}}>
                     <div className="user-info-fields">
@@ -189,12 +195,14 @@ UserSettings.propTypes = {
 
     passwordError: PropTypes.string.isRequired,
 
-    settingsSuccess: PropTypes.bool.isRequired
+    isUserPending: PropTypes.bool.isRequired,
+    settingsSuccess: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
     passwordError: state.UserReducer.passwordError,
-    settingsSuccess: state.UserReducer.settingsSuccess
+    settingsSuccess: state.UserReducer.settingsSuccess,
+    isUserPending: state.UserReducer.isUserPending,
 });
 
 const mapDispatchToProps = dispatch => {

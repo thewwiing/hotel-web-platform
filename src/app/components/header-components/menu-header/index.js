@@ -64,7 +64,7 @@ class MenuHeader extends React.Component {
                     isLoggedIn &&
                     <div className="header-profile">
                         <div className="header-profile-wrapper">
-                            <img src="https://avatars.mds.yandex.net/get-pdb/1705881/f8db19d4-c10e-4d27-83a3-db53d4f52430/s375" alt=""/>
+                            <img src="https://whatmessenger.ru/s3/uploads/posts/2018-07/1530544023_n6fgwzftnvg.jpg?b0a749c03fe00fd9b292c90620639415" alt=""/>
                             <span>Мой аккаунт</span>
                             <FontAwesomeIcon icon={faCaretDown}/>
                             <ul className="header-profile-dropdown">

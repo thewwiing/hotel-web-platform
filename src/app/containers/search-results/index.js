@@ -57,7 +57,7 @@ class SearchResults extends React.Component {
                         <div className="search-results-content">
                             <div className="search-listing-heading">
                                 <span>Результаты по: </span>
-                                <span>{searchFields['city']}</span> -> {totalCount} вариантов
+                                <span>{searchFields['city']}</span> -> {searchResults.length} вариантов
                             </div>
                             <div className="search-listing">
                                 {

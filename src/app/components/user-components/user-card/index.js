@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 class UserCard extends React.Component {
 
     render() {
-        const {signOutAction} = this.props;
+        const {signOutAction, userInfo, favouritesCount} = this.props;
 
 
         return (
@@ -18,19 +18,22 @@ class UserCard extends React.Component {
                 <div className="user-card-content">
                     <span>Welcome</span>
 
-                    <span>John Stones</span>
+                    <span>
+                        {userInfo['first_name'] || '' }
+                        {userInfo['second_name'] || ''}
+                    </span>
                 </div>
 
                 <div className="user-card-bottom">
 
                     <div className="user-card-stats">
                         <div className="card-stats-item">
-                            <span>Listings</span>
-                            <span>4</span>
+                            <span>Bookings</span>
+                            <span>{this.props.bookingsCount}</span>
                         </div>
                         <div className="card-stats-item">
                             <span>Избранное</span>
-                            <span>3</span>
+                            <span>{favouritesCount}</span>
                         </div>
                         <div className="card-stats-item">
                             <span>Отзывы</span>
@@ -51,7 +54,11 @@ class UserCard extends React.Component {
 }
 
 UserCard.propTypes = {
-    signOutAction: PropTypes.func.isRequired
+    signOutAction: PropTypes.func.isRequired,
+
+    userInfo: PropTypes.object.isRequired,
+
+    favouritesCount: PropTypes.number.isRequired
 };
 
 export default UserCard;

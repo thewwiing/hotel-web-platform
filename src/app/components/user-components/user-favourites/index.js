@@ -17,38 +17,7 @@ class UserFavourites extends React.Component {
     }
 
     render() {
-        // const {favourites} = this.props;
-        console.log(this.props.favourites);
-
-        const favourites = [
-            {
-                hotel_id: 3213123,
-                price: 32321,
-                one_day_price: 323,
-                name: "hotelname",
-                street_address: "Brusilovksaya 44",
-                rating: 3,
-                wifi: true,
-                parking: true,
-                parking_free: true,
-                breakfast: false,
-                stars: 3
-            },
-            {
-                hotel_id: 3213124,
-                price: 32321,
-                one_day_price: 323,
-                name: "hotelname",
-                street_address: "Brusilovksaya 44",
-                rating: 3,
-                wifi: true,
-                parking: true,
-                parking_free: true,
-                breakfast: false,
-                stars: 3
-            },
-
-        ];
+        const {favourites} = this.props;
 
         return (
             <div className='user-favourites'>

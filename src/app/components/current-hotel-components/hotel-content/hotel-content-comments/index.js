@@ -5,8 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class HotelComments extends React.Component {
     render() {
-        // const {comments} = this.props;
-        const comments = [];
+        const {comments} = this.props;
 
         return (
             <div className='hotel-comments-wrapper hotel-cw' style={{marginTop: '10px'}}>
@@ -18,37 +17,37 @@ class HotelComments extends React.Component {
                     <FontAwesomeIcon icon={faCaretDown}/>
                 </div>
                 {
-                    comments.length && comments['comments'].map((comment, index) => (
+                    comments['comments'].map((comment, index) => (
                         <div className={`comment-content-item ${index === comments['comments'].length - 1 ? 'last' : ''}`}
                              key={index}
                         >
                             <div className="comment-main-photo">
-                                <img src={comments.length && comment['photo']} alt=""/>
+                                <img src={comment['photo']} alt=""/>
                             </div>
                             <div className="comment-inner">
 
                                 <div className="comment-title">
                                     <div className="comment-add-photo">
-                                        <img src={comments.length && comment['photo']} alt=""/>
-                                        <span>{comments.length && comment['name']}</span>
+                                        <img src={comment['photo']} alt=""/>
+                                        <span>{comment['name']}</span>
                                     </div>
                                     <div className="comment-rank">
                                         <span>
                                             Очень хорошо
                                         </span>
                                         <div className="comment-rank-wrapper">
-                                            <span>{comments.length && comment['rank']}</span>
+                                            <span>{comment['rank']}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="comment-text">
-                                    "{comments.length && comment['text']}"
+                                    {comment['text']}
                                 </div>
 
                                 <div className="comment-date">
                                     <FontAwesomeIcon icon={faCalendarCheck}/>
-                                    {/*<span>{comments.length && comment['date']}</span>*/}
+                                    <span>{comment['date']}</span>
                                 </div>
                             </div>
                         </div>

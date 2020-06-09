@@ -20,7 +20,7 @@ class UserHeader extends React.Component {
     render() {
         const {
             state: {isMobileMenuOpened},
-            props: {activeNav, changeNav, signOutAction}
+            props: {activeNav, changeNav, signOutAction, userInfo, favouritesCount}
         } = this;
 
         return (
@@ -34,7 +34,11 @@ class UserHeader extends React.Component {
                     </div>
 
                     <div className="user-header-content">
-                        <UserCard signOutAction={signOutAction}/>
+                        <UserCard signOutAction={signOutAction}
+                                  userInfo={userInfo}
+                                  favouritesCount={favouritesCount}
+                                  bookingsCount={this.props.bookingsCount}
+                        />
 
                         <ul className="user-header-nav">
                             <li className={`user-nav-item ${activeNav === 'profile' ? 'active' : ''}`}
@@ -115,9 +119,13 @@ class UserHeader extends React.Component {
 
 UserHeader.propTypes = {
     signOutAction: PropTypes.func.isRequired,
-
     changeNav: PropTypes.func.isRequired,
-    activeNav: PropTypes.string.isRequired
+
+    activeNav: PropTypes.string.isRequired,
+
+    userInfo: PropTypes.object.isRequired,
+
+    favouritesCount: PropTypes.number.isRequired
 };
 
 export default UserHeader;

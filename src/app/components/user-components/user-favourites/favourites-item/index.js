@@ -17,7 +17,7 @@ class FavouritesItem extends React.Component {
 
     render() {
         const {hotel, history} = this.props;
-        const logo = hotel['logo'] ? hotel['logo'] : defaultLogo;
+        const logo = hotel['photo'] ? hotel['photo'] : defaultLogo;
 
         return (
             <div className='user-favourites-item'>

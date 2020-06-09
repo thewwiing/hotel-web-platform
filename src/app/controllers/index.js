@@ -12,6 +12,8 @@ export const CONTROLLERS = {
 
     [actionTypes.GET_USER_INFO]: (store, action) => userController.getUserInfo(store, action),
     [actionTypes.UPDATE_USER_INFO]: (store, action) => userController.updateUserInfo(store, action),
+    [actionTypes.BOOK_HOTEL]: (store, action) => userController.bookHotel(store, action),
+    [actionTypes.GET_USER_BOOKINGS]: (store, action) => userController.getUserFavourites(store, action),
     [actionTypes.GET_USER_FAVOURITES]: (store, action) => userController.getUserFavourites(store, action),
     [actionTypes.ADD_FAVOURITES]: (store, action) => userController.addToFavourites(store, action),
     [actionTypes.CHECK_FOR_OLD_PASSWORD]: (store, action) => userController.checkForOldPassword(store, action),

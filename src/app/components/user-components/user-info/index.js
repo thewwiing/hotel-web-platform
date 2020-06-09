@@ -9,12 +9,19 @@ import {
     faSave,
     faMapMarkerAlt
 } from "@fortawesome/free-solid-svg-icons";
-import {getUserInfoAction, updateUserInfoAction} from "../../../../store/actions";
+import {
+    clearUserInfo,
+    getUserFavouritesAction,
+    getUserInfoAction,
+    updateUserInfoAction
+} from "../../../../store/actions";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {bindActionCreators} from "redux";
 import {REGS} from "../../../../shared/regex";
 import {isAllValid} from "../../../../shared/helpers";
+
+import MediumPreloader from "../../../common/medium-preloader";
 
 class UserInfo extends React.Component {
 
@@ -28,11 +35,21 @@ class UserInfo extends React.Component {
 
     componentDidMount() {
         this.props.getUserInfoAction();
+        this.props.getUserFavouritesAction();
+    }
+
+    componentWillUnmount() {
+        this.props.clearUserInfo();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { fillFields, props: {userInfo}} = this;
-        if (JSON.stringify(userInfo) !== JSON.stringify(prevProps.userInfo)) {
+        const {
+            fillFields,
+            props: {userInfo},
+        } = this;
+        if ((JSON.stringify(userInfo) !== JSON.stringify(prevProps.userInfo)) //||
+            // (JSON.stringify(userInfo) !== JSON.stringify(this.state))
+        ) {
             fillFields(userInfo);
         }
     }
@@ -72,21 +89,28 @@ class UserInfo extends React.Component {
 
     fillFields = (userInfo) => {
         this.setState({
-            email:   {value: userInfo['email'] || '', isFocused: false, isValid: true},
-            phone_number:   {value: userInfo['phone_number'] || '', isFocused: false, isValid: true},
-            first_name:    {value: userInfo['first_name'] || '', isFocused: false, isValid: true},
-            second_name:    {value: userInfo['second_name'] || '', isFocused: false, isValid: true},
-            address: {value: userInfo['address'] || '', isFocused: false, isValid: true},
+            email:        {value: userInfo['email'] || '', isFocused: false, isValid: true},
+            phone_number: {value: userInfo['phone_number'] || '', isFocused: false, isValid: true},
+            first_name:   {value: userInfo['first_name'] || '', isFocused: false, isValid: true},
+            second_name:  {value: userInfo['second_name'] || '', isFocused: false, isValid: true},
+            address:      {value: userInfo['address'] || '', isFocused: false, isValid: true},
         });
     };
 
     render() {
         const {
+            props: {isUserPending},
             state: {first_name, second_name, email, address, phone_number}
         } = this;
 
         return (
             <div className='user-info'>
+                {
+                    isUserPending &&
+                    <MediumPreloader type={'Oval'} width={'25%'} height={'25%'} color={'#17458B'}/>
+                }
+
+
                 <div className="user-info-title h-cw-title-w">
                     <span>Ваш профиль</span>
                     <FontAwesomeIcon icon={faCaretDown}/>
@@ -212,15 +236,20 @@ UserInfo.propTypes = {
     getUserInfoAction: PropTypes.func.isRequired,
     updateUserInfoAction: PropTypes.func.isRequired,
 
-    userInfo: PropTypes.object.isRequired
+    userInfo: PropTypes.object.isRequired,
+
+    isUserPending: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-    userInfo: state.UserReducer.userInfo
+    userInfo: state.UserReducer.userInfo,
+    isUserPending: state.UserReducer.isUserPending,
 });
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
+            clearUserInfo,
+            getUserFavouritesAction,
             getUserInfoAction,
             updateUserInfoAction
         },

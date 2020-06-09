@@ -19,6 +19,10 @@ export const getUserInfoAction = payload => ({type: actionTypes.GET_USER_INFO, p
 export const getUserInfoSuccessAction = payload => ({type: actionTypes.GET_USER_INFO_SUCCESS, payload});
 export const updateUserInfoAction = payload => ({type: actionTypes.UPDATE_USER_INFO, payload});
 export const updateUserInfoSuccessAction = payload => ({type: actionTypes.UPDATE_USER_INFO_SUCCESS, payload});
+export const bookHotelAction = payload => ({type: actionTypes.BOOK_HOTEL, payload});
+export const bookHotelSuccessAction = payload => ({type: actionTypes.BOOK_HOTEL_SUCCESS, payload});
+export const getUserBookingsAction = payload => ({type: actionTypes.GET_USER_BOOKINGS, payload});
+export const getUserBookingsSuccessAction = payload => ({type: actionTypes.GET_USER_BOOKINGS_SUCCESS, payload});
 export const getUserFavouritesAction = payload => ({type: actionTypes.GET_USER_FAVOURITES, payload});
 export const getUserFavouritesSuccessAction = payload => ({type: actionTypes.GET_USER_FAVOURITES_SUCCESS, payload});
 export const addFavouritesAction = payload => ({type: actionTypes.ADD_FAVOURITES, payload});
@@ -37,3 +41,9 @@ export const getHotelsSuccessAction = payload => ({type: actionTypes.GET_HOTELS_
 export const getHotelInfoByIdAction = payload => ({type: actionTypes.GET_HOTEL_INFO_BY_ID, payload});
 export const getHotelInfoByIdSuccessAction = payload => ({type: actionTypes.GET_HOTEL_INFO_BY_ID_SUCCESS, payload});
 export const clearCurrentHotelAction = payload => ({type: actionTypes.CLEAR_CURRENT_HOTEL, payload});
+
+
+
+
+export const clearUserInfo = payload => ({type: 'CLEAR_USER_INFO', payload});
+export const setBookingsCount = payload => ({type: 'SET_BOOKINGS_COUNT', payload});

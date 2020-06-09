@@ -58,5 +58,10 @@ export const getRating = (rating) => {
 
 export const getRatingDescr = (rating) => {
     if (isNaN(rating)) return 'Не известно';
-    return 'Не сделано еще'
+    rating = +rating;
+    if (rating >= 0 && rating < 2) return 'Удовлетворительно';
+    if (rating >= 2 && rating < 3.5) return 'Хорошо';
+    if (rating >= 3.5 && rating < 4.5) return 'Очень хорошо';
+    if (rating >= 4.5 && rating <= 5) return 'Превосходно';
+    return 'Что-то не так!!!'
 };

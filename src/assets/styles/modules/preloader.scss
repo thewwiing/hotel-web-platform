@@ -4,3 +4,23 @@
   left: 50%;
   @include Transform(translate(-50%, -50%));
 }
+
+.medium-preloader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  background: #EEEEEE;
+
+  @include DisplayFlex();
+  justify-content: center;
+  align-items: center;
+
+  opacity: .5;
+
+  > div {
+    @include DisplayFlex();
+    justify-content: center;
+    align-items: center;
+  }
+}

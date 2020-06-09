@@ -7,11 +7,18 @@ import {withRouter} from "react-router";
 import HotelHeading from "../../components/current-hotel-components/hotel-heading";
 import HotelNav from "../../components/current-hotel-components/hotel-navigation";
 import HotelContent from "../../components/current-hotel-components/hotel-content";
-import {clearCurrentHotelAction, getHotelInfoByIdAction} from "../../../store/actions";
+import {
+    bookHotelAction,
+    clearCurrentHotelAction,
+    getHotelInfoByIdAction,
+    setBookingsCount
+} from "../../../store/actions";
+import BigPreloader from "../../common/big-preloader";
 
 class CurrentHotel extends React.Component {
     state = {
-      navIsFixed: false
+      navIsFixed: false,
+        isFakeLoaderOpen: false
     };
 
     componentDidMount() {
@@ -23,7 +30,7 @@ class CurrentHotel extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {currentHotel: {prevCurrentHotel}} = prevProps;
         const {getHotelInfoByIdAction, currentHotel, match: {params: {id}}} = this.props;
-        if (!prevCurrentHotel && !currentHotel) getHotelInfoByIdAction(id);
+        // if (!prevCurrentHotel && !currentHotel) getHotelInfoByIdAction(id);
     }
 
     componentWillUnmount() {
@@ -35,19 +42,24 @@ class CurrentHotel extends React.Component {
         const heading = document.querySelector('.hotel-content-wrapper');
         // const footer = document.querySelector('.footer');
 
-        if (heading.getBoundingClientRect().top <= 110) this.setState({navIsFixed: true});
-        if (heading.getBoundingClientRect().top > 110) this.setState({navIsFixed: false});
+        if (heading && heading.getBoundingClientRect().top <= 110) this.setState({navIsFixed: true});
+        if (heading && heading.getBoundingClientRect().top > 110) this.setState({navIsFixed: false});
     };
 
     render() {
         const {
-            state: {navIsFixed},
+            state: {navIsFixed, isFakeLoaderOpen},
             props: {
+                bookHotelAction,
                 currentHotel,
                 history,
-                isLoggedIn
+                isLoggedIn,
+                setBookingsCount,
+                match: {params: {id}}
             }
         } = this;
+
+        if (isFakeLoaderOpen) return <BigPreloader/>;
 
         return (
             <section className='hotel-wrapper'>
@@ -56,6 +68,10 @@ class CurrentHotel extends React.Component {
                 />
                 <HotelContent hotel={currentHotel}
                               isLoggedIn={isLoggedIn}
+                              bookHotelAction={bookHotelAction}
+                              id={id}
+                              openFakeLoader={() => this.setState({isFakeLoaderOpen: true})}
+                              setBookingsCount={setBookingsCount}
                 />
             </section>
 
@@ -66,6 +82,7 @@ class CurrentHotel extends React.Component {
 CurrentHotel.propTypes = {
     getHotelInfoByIdAction: PropTypes.func.isRequired,
     clearCurrentHotelAction: PropTypes.func.isRequired,
+    bookHotelAction: PropTypes.func.isRequired,
 
     currentHotel: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -80,8 +97,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
+            bookHotelAction,
             getHotelInfoByIdAction,
-            clearCurrentHotelAction
+            clearCurrentHotelAction,
+            setBookingsCount
         },
         dispatch
     );

@@ -23,7 +23,7 @@ class SearchItem extends React.Component {
             props: {hotel, history, toggleFav}
         } = this;
 
-        const logo = hotel && hotel['logo'] ? hotel['logo'] : hotelDefaultImg;
+        const logo = hotel && hotel['photo'] ? hotel['photo'] : hotelDefaultImg;
 
         return (
             <div className='result-item-wrapper'>
@@ -48,7 +48,7 @@ class SearchItem extends React.Component {
                         </div>
                     </div>
                     <div className="result-item-address">
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/>   {hotel['street_address']}
+                        <FontAwesomeIcon icon={faMapMarkerAlt}/>   {hotel['location']}
                     </div>
                     <div className="result-item-descr">
                         {/*{hotel['descr']}*/}
@@ -62,11 +62,12 @@ class SearchItem extends React.Component {
                 <div className="result-item-control">
                     <div className="result-rank-info">
                         <div className="result-rank-descr">
-                            <span>{getRatingDescr(hotel['rating'])}</span>
+                            <span>{getRatingDescr(hotel['rank'])}</span>
                             <span>14 отзывов</span>
                         </div>
                         <div className="result-rank">
-                            <span>{getRating(hotel['rating'])}</span>
+                            {/*<span>{getRating(hotel['rank'])}</span>*/}
+                            <span>{hotel['rank']}</span>
                         </div>
                     </div>
                     <div className="result-item-boxes">

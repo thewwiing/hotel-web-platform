@@ -1,6 +1,10 @@
 import API from '../../../request-service';
 import {
-    changePasswordAction, changePasswordFailedAction, changePasswordSuccessAction, checkForOldPasswordFailedAction,
+    changePasswordAction,
+    changePasswordFailedAction,
+    changePasswordSuccessAction,
+    checkForOldPasswordFailedAction,
+    getUserBookingsSuccessAction,
     getUserFavouritesSuccessAction,
     getUserInfoAction,
     getUserInfoSuccessAction,
@@ -55,6 +59,34 @@ userController.getUserFavourites = (store) => {
         (response) => store.dispatch(getUserFavouritesSuccessAction(response.data)),
         (error) => console.log(error)
     );
+};
+
+userController.getUserBookings = (store) => {
+
+    API.POST(
+        'app/my_bookings/',
+        {},
+        (response) => store.dispatch(getUserBookingsSuccessAction(response.data)),
+        (error) => console.log(error)
+    );
+};
+
+userController.bookHotel = (store, action) => {
+    const {hotel_id, start_date, end_date} = action.payload;
+    const body = {
+        hotel_id,
+        start_date,
+        end_date
+    };
+
+    API.POST(
+        'app/book/',
+        body,
+        (response) => {
+            console.log(response);
+        },
+        (error) => console.log(error)
+    )
 };
 
 userController.checkForOldPassword = (store, action) => {

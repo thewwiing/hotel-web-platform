@@ -76,11 +76,11 @@ class HotelHeading extends React.Component {
                             <div className="hotel-heading-control">
                                 <div className="hotel-rank-info">
                                     <div className="rank-info">
-                                        <div>{getRatingDescr(hotel['rating'])}</div>
+                                        <div>{getRatingDescr(hotel['rank'])}</div>
                                         <div>{hotel['commentsInfo'] && hotel['commentsInfo']['amount']} комментария</div>
                                     </div>
                                     <div className="rank-wrapper">
-                                        <span>{getRating(hotel['rating'])}</span>
+                                        <span>{hotel['rank']}</span>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@ class HotelHeading extends React.Component {
                             </div>
                             <div className="hotel-price-wrapper">
                                 <span>СУТКИ</span>
-                                <span>{getPrice(hotel['one-day_price'])} тг.</span>
+                                <span>{hotel['price']} тг.</span>
                             </div>
                         </div>
                     </div>
